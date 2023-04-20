@@ -1,0 +1,14 @@
+carousel_picture_1:
+  name: image
+  record: picture_1 (SlideshowImage)
+  blob: carousel_picture_1_blob
+
+carousel_picture_2:
+  name: image
+  record: picture_2 (SlideshowImage)
+  blob: carousel_picture_2_blob
+
+document_1:
+  name: fichier
+  record: document1 (Document)
+  blob: document_1_blob

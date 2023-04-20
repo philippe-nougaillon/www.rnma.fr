@@ -1,0 +1,11 @@
+<p class="title is-2">
+  Modifier un Message
+</p>
+
+<%= render 'form', message: @message %>
+
+<div class="mb-6">
+  <%= link_to 'Voir', @message %>
+  |
+  <%= link_to 'Retour', messages_path %>
+</div>

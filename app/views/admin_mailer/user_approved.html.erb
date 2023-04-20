@@ -1,0 +1,30 @@
+<div class="container">
+
+  <h1 style="font-size: 20px">
+    Votre demande de création de compte a été acceptée.
+  </h1>
+
+  <p>
+    Voici vos informations :
+  </p>
+
+  <p>
+    <strong>Nom : </strong>
+    <%= @user.nom %>
+  </p>
+  <p>
+    <strong>Prénom : </strong>
+    <%= @user.prénom %>
+  </p>
+  <p>
+    <strong>Email : </strong>
+    <%= @user.email %>
+  </p>
+  <p>
+    <strong>Maison : </strong>
+    <%= @user.maison.nom %>
+  </p>
+
+  <%= link_to "Cliquez ici pour vous connecter", new_user_session_url %>
+
+</div>

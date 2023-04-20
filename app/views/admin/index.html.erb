@@ -1,0 +1,127 @@
+<h1 class="title is-2">
+    <i class="fas fa-users-cog"></i>
+    Administration
+</h1>
+
+<div id="admin-table" class="columns mt-6">
+    <div class="column">
+        <table class="table is-hoverable is-fullwidth is-bordered">
+            <tr>
+                <td><i class="fas fa-newspaper is-size-4"></i></td>
+                <td>
+                    <div class="is-flex is-justify-content-space-between">
+                    <%= link_to 'Actualités', posts_path, class:'has-text-weight-medium is-size-4' %>
+                        <% unless @member_contents_count.zero? %>
+                            <span class="tag is-danger is-rounded" style="font-weight: 900"><%= @member_contents_count %></span>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-calendar-alt is-size-4"></i></td>
+                <td><%= link_to 'Agenda', evenements_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-file is-size-4"></i></td>
+                <td><%= link_to 'Publications', publications_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-drafting-compass is-size-4"></i></td>
+                <td><%= link_to 'Projets(Actions)', projets_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-book is-size-4"></i></td>
+                <td><%= link_to 'Ressources', ressources_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="column">
+        <table class="table is-hoverable is-fullwidth is-bordered">
+            <tr>
+                <td><i class="fas fa-file-contract is-size-4"></i></td>
+                <td><%= link_to 'Adhésions', adhesions_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-file-invoice is-size-4"></i></td>
+                <td><%= link_to 'Cotisations', cotisations_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-hotel is-size-4"></i></td>
+                <td><%= link_to 'Maisons', maisons_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-id-card-alt is-size-4"></i></td>
+                <td><%= link_to 'Contacts', contacts_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-calendar-check is-size-4"></i></td>
+                <td><%= link_to 'Actions', actions_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="column">
+        <table class="table is-hoverable is-fullwidth is-bordered">
+            <tr>
+                <td><i class="fas fa-users is-size-4"></i></td>
+                <td>
+                    <div class="is-flex is-justify-content-space-between">
+                        <%= link_to 'Utilisateurs', users_path, class:'has-text-weight-medium is-size-4' %>
+                        <% unless @unapproved_users_count.zero? %>
+                            <span class="tag is-danger is-rounded"style="font-weight: 900"><%= @unapproved_users_count %></span>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-search is-size-4"></i></td>
+                <td><%= link_to 'Audit trail', audits_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="far fa-images is-size-4"></i></td>
+                <td><%= link_to 'Carrousel', slideshow_images_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-handshake is-size-4"></i></td>
+                <td><%= link_to 'Partenaires', partenaires_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-comment-dots is-size-4"></i></td>
+                <td>
+                    <div class="is-flex is-justify-content-space-between">
+                        <%= link_to 'Messages', messages_path, class:'has-text-weight-medium is-size-4' %>
+                        <% unless @new_messages_count.zero? %>
+                            <span class="tag is-danger is-rounded" style="font-weight: 900"><%= @new_messages_count %></span>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="column">
+        <table class="table is-hoverable is-fullwidth is-bordered">
+            <tr class="m-3 mt-6">
+                <td><i class="fas fa-tags is-size-4"></i></td>
+                <td><%= link_to 'Catégories', categories_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-tags is-size-4"></i></td>
+                <td><%= link_to 'Typologies', typologies_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-envelope-open-text is-size-4"></i></td>
+                <td><%= link_to 'Lettre Hebdo', admin_admin_lettre_hebdo_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-envelope is-size-4"></i></td>
+                <td><%= link_to 'Mail Logs', mail_logs_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+            <tr>
+                <td><i class="fas fa-archive is-size-4"></i></td>
+                <td><%= link_to 'Archives SIB', sibs_path, class:'has-text-weight-medium is-size-4' %></td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<%= bulma_form_with(model: cotisation) do |form| %>
+  <% if cotisation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cotisation.errors.count, "erreur") %> empêche(nt) cette cotisation d'être enregistrée !</h2>
+
+      <ul>
+        <% cotisation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="title is-4">
+    <%= cotisation.try(:adhesion).try(:maison).try(:nom) %>
+  </p>
+
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <%= form.hidden_field :adhesion_id %>
+      <%= form.select :période, %w{ 2020 2021 2022 2023 2024 2025 }, required: true %>
+      <%= form.number_field :montant, step: :any, required: true %>
+      <%= form.date_field :date_échéance %>
+      <%= form.select :workflow_state, Cotisation.workflow_spec.states.keys.to_a, label: "Etat" %>
+      <%= form.text_area :mémo %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

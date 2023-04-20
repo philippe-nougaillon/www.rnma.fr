@@ -1,0 +1,32 @@
+<% if current_page?(root_path) || current_page?(pages_welcome_url) %>
+  <section id="welcome-banner" class="hero is-medium">
+    <div id="welcome-hero" class="hero-body">
+      <h1 id="main-title" class="title is-1 has-shadow is-color-primary">
+        Bienvenue sur le site du RNMA
+      </h1>
+      <h2 id="main-subtitle" class="subtitle is-2 is-color-primary">
+        Les Maisons des associations au service de la vie associative locale
+      </h2>
+    </div>
+  </section>
+<% else %>
+  <section id="membres-banner" class="hero is-medium">
+    <div id="membres-hero" class="hero-body">
+      <div id="main-columns" class="columns">
+        <div id="container-forum-link" class="column">
+          <%= link_to "/forum", id: "forum-link", class: "is-size-4 is-color-primary", title: "Cliquez ici pour aller sur la plateforme d'échanges" do %>
+            <span>>>></span>Rdv sur la plateforme d'échanges dédiée aux
+            appels à contributions
+          <% end %>
+        </div>
+        <div class="column">
+          <h1 id="main-title" class="title is-1 is-color-primary">
+            Bienvenue
+            <span class="rnma-orange"><%= current_user.try(:prénom) %></span>
+            dans cet espace réservé aux membres
+          </h1>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>

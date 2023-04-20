@@ -1,0 +1,31 @@
+<%= bulma_form_with(model: user, local: true) do |form| %>
+
+  <div class="columns">
+    <div class="column is-one-third">
+      <%= form.text_field :nom %>
+      <%= form.text_field :prénom %>
+      <%= form.text_field :email %>
+      <%= form.text_field :fonction %>
+      <p class="mb-3">
+        Cet utilisateur <b>apparaitra dans l'équipe du RNMA</b> si la fonction est non vide et qu'il est 'admin' !
+        <br>
+        Il <b>apparaitra dans les membres du Conseil d'Administration</b> si sa fonction est 'CA' !
+      </p>
+      <%= form.select :maison_id, options_from_collection_for_select(Maison.reorder(:ville), :id, :ville_mda, user.maison_id), include_blank: true %>
+      <%= form.text_field :mobile %>
+      <%= form.label :photo, class: 'has-text-weight-bold has-text-dark' %>
+      <%= form.file_field :photo %>
+      <%= form.text_field :poids %>
+      <% if user.new_record? %>
+        <%= form.password_field :password, label:'Mot de passe' %>
+        <%= form.password_field :password_confirmation, label:'Confirmation mot de passe' %>
+      <% end %>
+      <%= form.check_box :approved %>
+      <%= form.check_box :admin %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "button is-success" %>
+  </div>
+<% end %>

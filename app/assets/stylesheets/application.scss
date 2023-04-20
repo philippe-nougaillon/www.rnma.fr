@@ -1,0 +1,495 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*/
+
+//@import "sass/utilities/initial-variables";
+
+//// VARIABLES AND GENERAL ////
+
+$color-primary : #27496B;
+$color-secondary : #E56606;
+$color-tertiary : #144C6D;
+$color-quaternary : #428BC7;
+$rnma-blue : #27496B;
+$rnma-orange : #F2AD3E;
+
+p, strong, a, li, .is-ibm{
+  font-family: 'IBM Plex Sans', serif;
+  color: black;
+  font-weight: 150;
+}
+h1,h2, h2 strong, h3, h3 strong, h4, h5, h6, .is-antonio{
+  font-family: 'Antonio', sans-serif;
+}
+
+a:hover {
+  background-color: transparent;
+}
+
+.is-active{
+  background-color: transparent;
+}
+
+.button{
+  transition: background-color .2s;
+
+  &:hover{
+    background-color: none; // this only applies the transition, with the color given by bulma
+  }
+}
+
+#content.content{
+  h1{
+    margin-bottom: 0;
+  }
+  h2, h3{
+    font-weight: 300;
+  }
+  .is-size-3{
+    line-height:50px;
+  }
+  
+  .is-size-4{
+    line-height:30px;
+  }
+  
+  .is-size-5{
+    line-height:25px;
+  }
+  #equipe{
+    p{
+      margin-bottom: 0;
+    }
+    a{
+      transition: .3s;
+      &:hover{
+        color: black;
+      }
+    }
+  }
+  figure#maison-tile-image{
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 480px){
+  p, h1, h2, h3{
+    &.title, &.subtitle{
+      &.is-1{
+        font-size: 30px;
+      }
+      &.is-2{
+        font-size: 35px;
+      }
+      &.is-3{
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+//// VARIABLES AND GENERAL
+
+
+//// COLOR ////
+
+.is-color-primary{
+  color: $color-primary !important;
+}
+
+.is-color-secondary{
+  color: $color-secondary !important;
+}
+
+.is-color-tertiary{
+  color: $color-tertiary !important;
+}
+
+.is-color-quaternary{
+  color: $color-quaternary !important;
+}
+
+.rnma-orange{
+  color: $rnma-orange !important;
+}
+
+//// COLOR
+
+
+//// BACKGROUND COLOR ////
+
+.is-background-color-primary{
+  background-color: $color-primary;
+}
+
+.is-background-color-secondary{
+  background-color: $color-secondary;
+}
+
+//// BACKGROUND COLOR
+
+
+//// NAVBAR ////
+
+.navbar {
+  &.nav_front-size{
+    height: 70px;
+  }
+  .navbar-burger:hover{
+    background: none;
+  }
+  #navbar-back-start a{
+    background-color: transparent;
+    float: left;
+    color: $rnma-blue;
+    text-decoration: none;
+    padding: 0.5rem 0.3rem;
+    margin: 0 0.45rem;
+    border-bottom: 2px solid transparent;
+
+    &:hover, &.is-active {
+      transition: .3s;
+      color: $rnma-orange;
+      border-bottom: 2px solid $rnma-orange;
+      border-radius: 0px;
+    }
+  }
+
+  #main-logo{
+    position: absolute;
+    width: auto;
+    height: 75px;
+    transition: 1s;
+    @media only screen and (max-width: 480px){
+      // z-index: -1;
+      top: 5px; left: 20px;
+      height: 60px;
+      transition: none;
+    }
+  }
+  
+  #navbar-front-start{
+    a,p, svg{
+      color: $color-primary;
+      transition: all 0.5s;
+      &:hover{
+        background-color: transparent;
+      }
+    }
+    a:hover, a.is-active{
+      text-decoration: underline;
+    }
+  }
+}
+//// NAVBAR
+
+
+//// TILE ////
+
+.tile.is-parent{
+  padding: 0.25rem !important;
+  .evenement-tile, .post-tile, .maison-tile, .ressource-tile, .publication-tile, .projet-tile, .partenaire-tile, .equipe-tile {
+    transition: background-color 1s;
+
+    p, .title{
+      transition: color 1s;
+    }
+
+    img{
+      transition: transform 1s;
+      border-radius: 3px;
+    }
+
+    &:hover{
+      background-color: $color-quaternary;
+      p, .title{
+        color: white;
+      }
+      img{
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.evenement-tile #evenement-tile-date{
+  color: $rnma-orange;
+}
+.post-tile img{
+  opacity: 0.85;
+  transition: transform 1s, opacity 1s;
+}
+
+.post-tile:hover img{
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+.maison-tile{
+  a, p{
+    overflow-wrap: break-word;
+    color: black;
+    transition: color 1s;
+  }
+  a:hover{
+    text-decoration: underline;
+    &.social-network, &#ressource{
+      text-decoration: none;
+    }
+  }
+}
+
+.equipe-tile:hover, .maison-tile:hover{
+  a{
+    color: white;
+  }
+}
+
+.box.equipe-tile{
+  padding: 0;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+//// TILE
+
+
+//// FONT AWESOME ICON ////
+
+.fa-edit, .fa-search, .fa-question-circle, .fa-envelope-open-text, .fa-facebook, .fa-twitter, .fa-linkedin-in, .fa-youtube, .fa-instagram, .fa-comments{
+  color: grey;
+  transition: .3s;
+  &:hover{
+    transform: scale(1.5);
+  }
+}
+
+.fa-edit{
+  float: right;
+}
+
+.fa-facebook{
+  color: rgb(56,84,149);
+}
+
+.fa-twitter{
+  color :rgb(21,156,231);
+}
+
+.fa-linkedin-in{
+  color :rgb(0,115,175);
+}
+
+.fa-envelope-open-text{
+  color :rgb(228,65,53);
+}
+
+.fa-youtube{
+  color :rgb(255,0,0);
+}
+
+.fa-instagram{
+  color :rgb(201, 50, 142);
+}
+//// FONT AWESOME ICON
+
+
+//// FOOTER ////
+
+#pre-footer{
+  display: flex;
+  justify-content: center;
+  img#footer-img{
+    max-width:1100px;
+    width: 100%
+  }
+}
+
+footer{
+  background-color: $color-tertiary;
+
+  #footer-head{
+    p, img{
+      @media only screen and (max-width: 1024px){
+        text-align: left !important;
+        margin-left: 15%;
+      }
+      @media only screen and (max-width: 480px){
+        margin-left: 0;
+        text-align: center !important;
+      }
+    }
+    img{
+      @media only screen and (max-width: 480px){
+        margin-left: 35%;
+      }
+    }
+  }
+  #footer-social-network a{
+    margin-left: 30px;
+    @media only screen and (max-width: 480px){
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  p, .fa-facebook, .fa-twitter, .fa-envelope-open-text, .fa-youtube{
+    color: white;
+  }
+  .menu-list a, a#confidentialite{
+    color: white;
+    &:hover{
+      color: white;
+      text-decoration: underline;
+      background-color: transparent;
+    }
+  }
+  #partenaires_fi{
+    padding: 0;
+    #partenaire-fi-logo img{
+      filter: drop-shadow(0px 0px 33px white);
+      transition: 1s;
+      &:hover{
+        transform: scale(2);
+        filter: drop-shadow(0px 0px 3px white);
+      }
+    }
+    *{
+      padding: 0;
+      *{
+        padding: 0;
+      }
+    }
+  }
+}
+
+//// FOOTER
+
+
+  //// PAGINATION ////
+
+nav ul li a .is-current{
+  color: white;
+  background-color: $color-secondary;
+}
+
+.pagination-list{
+  .pagination-previous, .pagination-next, .pagination-link, .pagination-ellipsis{
+    border : none;
+    transition: .3s background-color, .3s color;
+
+    &:hover{
+      color: white;
+      background-color: $color-secondary;
+    }
+  }
+}
+
+  //// PAGINATION
+
+//// PAGE CONNEXION ////
+
+#connexion{
+  background-color: white;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  padding: 20px 80px;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  @media only screen and (max-width: 480px){
+    padding: 5px 10px;
+    width: 95vw;
+  }
+}
+
+  //// PAGE CONNEXION
+
+//// SELECT2 ////
+  
+  .select2-container {
+    .select2-selection--single {
+      height: 2.25rem !important;
+      padding: 3px 0;
+      border: 1px solid #dbdbdb;
+  
+      .select2-selection__arrow{
+        top: 5px;
+      }
+  
+      .select2-selection__placeholder {
+        color: #dbdbdb;
+      }
+    }
+  
+    .select2-dropdown {
+      border: 1px solid #dbdbdb;
+      border-top: 0;
+  
+      .select2-search {
+        margin: 5px;
+  
+        .select2-search__field {
+          padding: 10px;
+          border-radius: 3px;
+          font-size: 1rem;
+          height: 2.25em;
+          box-shadow: inset 0 1px 2px rgba(10,10,10,.1);
+          max-width: 100%;
+          width: 100%;
+          border-radius: 3px;
+        }
+      }
+  
+      .select2-results__options {
+        max-height: 200px;
+  
+        .select2-results__option {
+          padding: 0.37em 0.75em;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .select2-selection__arrow{
+    display: none;
+  }
+
+//// SELECT2
+
+#devise a{
+  font-size: 20px;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+h3 a{
+  font-family: 'Antonio', sans-serif;
+}
+
+#ressource-category{
+  color: $rnma-orange;
+}
+
+//// OTHER
+
+@import 'bulma';
+@import "thredded";
+
+// Import BulmaTagsInput main Sass File
+//@import '@creativebulma/bulma-tagsinput/src/sass/index';

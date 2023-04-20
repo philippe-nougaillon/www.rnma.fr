@@ -1,0 +1,27 @@
+carousel_picture_1_blob:
+  key: abfegv2b6jul82jn2mfswtm66if2
+  filename: présentationRNMA1.webp
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 1000
+  checksum: IOMBW/5g2Y7+1kWtymmrKQ==
+  service_name: test
+
+carousel_picture_2_blob:
+  key: jg5rz6ay99s533qy0juuwi9p45gj
+  filename: présentationRNMA3.jpg
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 1000
+  checksum: mHbwuoza7b4vQDEJKDMURg==
+  service_name: test
+
+#pas fini
+document_1_blob:
+  key: tcoockm2yxokarhii32u91qhs609
+  filename: présentationRNMA1.webp
+  content_type: image/jpeg
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 1000
+  checksum: IOMBW/5g2Y7+1kWtymmrKQ==
+  service_name: test

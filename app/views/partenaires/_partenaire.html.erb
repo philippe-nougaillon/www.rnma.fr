@@ -1,0 +1,8 @@
+<tr>
+  <td><%= link_to partenaire.nom, partenaire %></td>
+  <td><%= partenaire.type_partenaire %></td>
+  <td><%= partenaire.lien %></td>
+  <td><%= partenaire.poids %></td>
+  <td><%= link_to 'Modifier', edit_partenaire_path(partenaire) %></td>
+  <td><%= link_to '[X]', partenaire, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

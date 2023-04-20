@@ -1,0 +1,23 @@
+<tr>
+    <td><%= link_to user.email, user %></td>
+    <td><%= user.nom %></td>
+    <td><%= user.mda.nom if user.mda %></td>
+    <td>
+        <span class="<%= !user.admin? ? 'has-text-success' : 'has-text-danger'%>">
+            <%= t user.admin? %>
+        </span>
+    </td>
+    <td>
+        <span class="<%= user.approved? ? 'has-text-success' : 'has-text-danger'%>">
+            <%= t user.approved? %>
+        </span>
+    </td>
+    <td><%= time_ago_in_words(user.created_at) %>
+    <td><%= user.current_sign_in_at.strftime("%d/%m/%Y %H:%M") if user.current_sign_in_at %></td>
+    <td><%= user.sign_in_count %></td>
+    <td><%= user.poids %></td>
+    <td><%= link_to 'Modifier', edit_user_path(user) %></td>
+    <td><%= link_to_unless user.approved, 'Valider', accepter_user_path(user), data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+    <td><%= link_to_unless user.approved, 'Refuser', refuser_user_path(user), data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+    <td><%= link_to '[X]', user, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>   

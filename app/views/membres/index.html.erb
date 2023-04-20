@@ -1,0 +1,16 @@
+<%= render 'partials/notification' %>
+<%= render 'partials/banner' %>
+
+<div class="container is-max-widescreen">
+  <%= render 'partials/carousel' %>
+</div>
+
+<div id="main-container">
+  <div id="main-content">
+    <%= render partial: 'partials/evenements', locals: { evenement: @evenements} %>
+    <%= render partial: 'partials/posts', locals: { post: @posts} %>
+    <% if @ressources.any? %>
+      <%= render partial: 'partials/ressources_membre', locals: { ressource: @ressources} %>
+    <% end %>
+  </div>
+</div>

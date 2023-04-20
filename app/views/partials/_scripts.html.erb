@@ -1,0 +1,70 @@
+<script>
+    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+    $(document).ready(function() {
+        $(".navbar-burger").click(function() {
+            $(".navbar-burger").toggleClass("is-active");
+            $(".navbar-menu").toggleClass("is-active");
+        });
+    });
+
+    // Effacer la notification si clic sur la croix
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            var $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+
+    // Cookies Bar
+    class CookieBar {
+        constructor() {
+            this.cookiesBar = document.getElementById('cookies-bar');
+        }
+
+        init() {
+            console.log("CookieBar init...")
+            this.cookiesAllowed();
+            this.addButtonBehaviors();
+        }
+
+        cookiesAllowed() {
+            const is_allowed = Cookies.get('allow_cookies') === 'yes';
+            console.log("CookiesBar cookies allowed is", is_allowed);
+            return is_allowed;
+        }
+
+        addButtonBehaviors() {
+            if (!this.cookiesBar) {
+                return;
+            }
+            this.cookiesBar.querySelector('.accept').addEventListener('click', () => this.allowCookies(true));
+            this.cookiesBar.querySelector('.reject').addEventListener('click', () => this.allowCookies(false));
+        }
+
+        allowCookies(allow) {
+            if (allow) {
+                console.log("CookieBar yes...")
+                Cookies.set('allow_cookies', 'yes', {
+                    expires: 365
+                });
+            } else {
+                Cookies.set('allow_cookies', 'no', {
+                    expires: 365
+                });
+            }
+            this.cookiesBar.classList.add('hidden');
+        }
+    }
+
+    window.onload = function() {
+        console.log(window.location.pathname);
+        if (window.location.pathname === "/")
+        { 
+            let cookieBar = new CookieBar();
+            cookieBar.init();
+        }
+    }
+</script>

@@ -1,0 +1,5 @@
+<tr>
+  <td><%= typology.nom %></td>
+  <td><%= link_to 'Modifier', edit_typology_path(typology) %></td>
+  <td><%= link_to '[X]', typology, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nom: CHORUM
+  type_partenaire: 1
+  lien: www.chorum.fr
+
+two:
+  nom: Avise
+  type_partenaire: 2
+  lien: www.avise.org

@@ -1,0 +1,5 @@
+<%= link_to label.humanize,
+      eval("#{transition}_message_path(@message)"), 
+      class: "button is-" + Message.workflow_spec.states[state.to_sym].meta[:style],
+      disabled: !@message.send('can_' + transition + '?')
+%>

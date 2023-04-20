@@ -1,0 +1,78 @@
+<h1 class="title">
+    <%= page_title! @user.prénom_nom %>
+</h1>
+
+<p>
+    <strong>Email :</strong>
+    <%= mail_to @user.email %>
+</p>
+
+<br>
+
+<p>
+    <strong>Maison :</strong>
+    <%= @user.try(:maison).try(:nom) %>
+</p>
+
+<br>
+
+<p>
+    <strong>Fonction :</strong>
+    <%= @user.fonction %>
+</p>
+
+<br>
+
+<p>
+    <strong>Mobile :</strong>
+    <%= @user.mobile %>
+</p>
+
+<br>
+
+<% if current_user.admin? %>
+    <p>
+        <strong>Poids :</strong>
+        <%= @user.poids %>
+    </p>
+
+    <br>
+
+    <p>
+        <strong>Créé le :</strong>
+        <%= l(@user.created_at) %>
+        (il y a <%= time_ago_in_words(@user.created_at) %>)
+    </p>
+
+    <p>
+        <strong>Approuvé :</strong>
+        <%= @user.approved ? 'Oui' : 'Non' %>
+    </p>
+
+    <p>
+        <strong>sign_in_count :</strong>
+        <%= @user.sign_in_count %>
+    </p>
+
+    <p>
+        <strong>current_sign_in_at :</strong>
+        <%= l(@user.current_sign_in_at) if @user.current_sign_in_at %>
+    </p>
+
+    <p>
+        <strong>current_sign_in_ip :</strong>
+        <%= @user.current_sign_in_ip %>
+    </p>
+
+    <div class="m-6 px-6">
+        <figure class="image mb-2">
+            <%= image_tag @user.photo, width: '100%', height: '100%', alt: "photo du membre '#{ @user.nom }'" if @user.photo.attached? %>
+        </figure>
+    </div>
+
+    <br>
+    <div class="mb-6">
+        <%= link_to 'Modifier', edit_user_path(@user), class: "button is-link" %>
+        <%= link_to 'Retour', users_path, class: "button" %>
+    </div>
+<% end %>

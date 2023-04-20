@@ -1,0 +1,51 @@
+<h1 class="title is-2">
+  <i class="fas fa-hotel"></i>
+  Maisons
+</h1>
+
+<%= form_tag maisons_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: Maison.all.pluck(:region_name).compact.uniq.sort, show_new_button: false } %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+  
+    <thead>
+      <tr>
+        <th><%= sort_link 'maisons.id', 'ID' %></th>
+        <th><%= sort_link 'maisons.nom', 'Nom' %></th>
+        <th><%= sort_link 'maisons.type_structure', 'Type' %></th>
+        <th><%= sort_link 'maisons.ville', 'Ville' %></th>
+        <th><%= sort_link 'maisons.region_name', 'Nom Région' %></th>
+        <th>Adhésion</th>
+        <th>Cotisation</th>
+        <th>Contacts</th>
+        <th>Actions</th>
+        <th><%= sort_link 'maisons.updated_at', 'MÀJ' %></th>
+        <th colspan=2></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @maisons.includes(:adhesion, :cotisations, :contacts, :actions) %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=12></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<%= page_entries_info @maisons, entry_name: 'maison' %>
+<%= paginate @maisons %>
+
+<div class="mb-6">
+  <%= link_to 'Export XLS', url_for(params.permit(:search, :state, :direction, :sort).merge(format: :xls)) %>
+  |
+  <% if params[:archivées] %>
+    <%= link_to 'Voir les maisons non-archivées', maisons_path %>
+  <% else %>
+    <%= link_to 'Voir les maisons archivées', maisons_path(archivées: true) %>
+  <% end %>
+</div>

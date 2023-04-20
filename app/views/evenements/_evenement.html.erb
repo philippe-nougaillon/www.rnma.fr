@@ -1,0 +1,25 @@
+<tr>
+  <td><%= link_to (l evenement.debut), evenement %></td>
+  <td><%= evenement.titre %></td>
+  <td><%= truncate(evenement.chapeau, length: 100) %></td>
+  <td><%= evenement.lieu %></td>
+  <td>
+    <span class="<%= evenement.publique? ? 'has-text-success' : 'has-text-danger'%>">
+      <%= t evenement.publique? %>
+    </span>
+  </td>
+  <td>
+    <span class="<%= evenement.membres? ? 'has-text-success' : 'has-text-danger'%>">
+      <%= t evenement.membres? %>
+    </span>
+  </td>
+  <td>
+    <span class="tag is-medium is-light <%= evenement.style %>"><%= evenement.try(:workflow_state).try(:humanize) %></span> 
+  </td>
+  <td><%= time_ago_in_words evenement.updated_at %></td>
+  <td><%= evenement.poids %></td>
+  <td><%= link_to 'Voir', evenement %></td>
+  <td><%= link_to 'Modifier', edit_evenement_path(evenement) %></td>
+  <td><%= link_to 'Dupliquer', duplicate_evenement_path(evenement) %></td>
+  <td><%= link_to '[X]', evenement, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

@@ -1,0 +1,51 @@
+<div class="box">
+  <p class="title is-3 mb-6">
+    <i class="far fa-calendar-check"></i>
+    <%= @action.intitulé %>
+    (<%= @action.contact.prénom_nom %>)
+  </p>
+  
+  <p>
+    <strong>Intitulé :</strong>
+    <%= @action.intitulé %>
+  </p>
+
+  <br>
+
+  <p>
+    <% if @action.date_rappel && !@action.fait %>
+      <strong>Date rappel :</strong>
+      <%= l @action.date_rappel.to_date %>
+      (dans <%= time_ago_in_words @action.date_rappel %>)
+    <% else %>
+      <strong>Fait :</strong>
+      <%= @action.fait ? 'Oui' : 'Non' %>
+    <% end %>
+  </p>
+
+  <br>
+
+  <p>
+    <strong>Contact :</strong>
+    <%= @action.user.prénom %>
+  </p>
+  <br>
+
+  <p>
+    <strong>Créée :</strong>
+    il y a <%= time_ago_in_words @action.created_at %>
+  </p>
+
+  <br>
+
+  <p>
+    <strong>Mémo :</strong>
+    <%= @action.mémo %>
+  </p>
+</div>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_action_path(@action) %>
+  |
+  <%= link_to 'Retour', actions_path %>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <%= link_to root_url do %>
+    <%= image_tag 'logo.webp', class: 'logo', width: '100%', height: '100%', alt: 'logo RNMA' %>
+  <% end %>
+
+  <h1>Votre message au RNMA a bien été pris en compte, et sera traité dans les meilleurs délais.</h1>
+
+  <h3>Informations transmises :</h3>
+
+  <p>
+    <strong>Nom : </strong>
+    <%= @message.nom %>
+  </p>
+  <p>
+    <strong>Email : </strong>
+    <%= @message.email %>
+  </p>
+  <p>
+    <strong>Structure : </strong>
+    <%= @message.structure %>
+  </p>
+  <p>
+    <strong>Téléphone : </strong>
+    <%= @message.téléphone %>
+  </p>
+  <p>
+    <strong>Message : </strong>
+    <%= @message.message %>
+  </p>
+</div>

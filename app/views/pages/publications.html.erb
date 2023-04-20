@@ -1,0 +1,15 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white mt-6">
+      Nos Publications
+    </h1>
+  </div>
+</section>
+
+<div class="publications">
+  <div class="columns is-multiline <%= request.variant.include?(:phone) ? 'my-6 mx-2' : 'm-6' %>">
+    <%= render partial: 'partials/publication_tile', collection: @publications, as: :publication %> 
+  </div>
+</div>
+
+<%= paginate @publications, theme: 'front', outer_window: 1, window: 2 %>

@@ -1,0 +1,151 @@
+<div class="box">
+  <p class="title is-3 mb-6">
+    <i class="fas fa-file-contract"></i>
+    <%= @adhesion.maison_organisme %>
+  </p>
+  <div class="columns">
+    <div class="column is-three-fifths">
+      <p>
+        <strong>Type de structure :</strong>
+        <%= @adhesion.type_structure %>
+      </p>
+      <br>
+
+      <p>
+        <strong>Adresse :</strong>
+        <%= @adhesion.adresse %>
+      </p>
+
+      <p>
+        <strong>CP :</strong>
+        <%= @adhesion.cp %>
+      </p>
+
+      <p>
+        <strong>Ville :</strong>
+        <%= @adhesion.ville %>
+      </p>
+
+      <br>
+
+      <p>
+        <strong>Nom du contact :</strong>
+        <%= @adhesion.nom %>
+      </p>
+
+      <p>
+        <strong>Prénom :</strong>
+        <%= @adhesion.prénom %>
+      </p>
+
+      <p>
+        <strong>Fonction :</strong>
+        <%= @adhesion.fonction %>
+      </p>
+
+      <p>
+        <strong>Téléphone :</strong>
+        <%= @adhesion.téléphone %>
+      </p>
+
+      <p>
+        <strong>Email :</strong>
+        <%= @adhesion.email %>
+      </p>
+
+      <br>
+
+      <p>
+        <strong>Documents attachés :</strong>
+        <% if @adhesion.doc_1.attached? %>
+          <%= link_to @adhesion.doc_1.filename, url_for(@adhesion.doc_1), target: '_blank' %>
+        <% end %>
+        <% if @adhesion.doc_2.attached? %>
+          <%= link_to @adhesion.doc_2.filename, url_for(@adhesion.doc_2), target: '_blank' %>
+        <% end %>
+        <% if @adhesion.doc_3.attached? %>
+          <%= link_to @adhesion.doc_3.filename, url_for(@adhesion.doc_3), target: '_blank' %>
+        <% end %>
+        <% if @adhesion.doc_4.attached? %>
+          <%= link_to @adhesion.doc_4.filename, url_for(@adhesion.doc_4), target: '_blank' %>
+        <% end %>
+        <% if @adhesion.doc_5.attached? %>
+          <%= link_to @adhesion.doc_5.filename, url_for(@adhesion.doc_5), target: '_blank' %>
+        <% end %>
+        <% if @adhesion.doc_6.attached? %>
+          <%= link_to @adhesion.doc_6.filename, url_for(@adhesion.doc_6), target: '_blank' %>
+        <% end %>
+      </p>
+      <br>
+
+      <div id="content" class="content">
+        <strong>Documents attachés :</strong>
+        <% if @adhesion.documents.any? %>
+          <ul>
+            <% @adhesion.documents.each do | document | %>
+              <% if document.fichier.attached? %>
+                <li><%= link_to document.fichier.filename, url_for(document.fichier), target: '_blank' %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <p>
+        <strong>Adhésion créée :</strong>
+        il y a <%= time_ago_in_words @adhesion.created_at %>
+      </p>
+
+      <br>
+
+      <p>
+        <strong>Etat :</strong>
+        <span class="tag is-medium is-light <%= @adhesion.style %>"><%= @adhesion.try(:workflow_state).try(:humanize) %></span> 
+      </p>
+
+      <p>
+        <strong>Depuis :</strong>
+        <%= time_ago_in_words @adhesion.updated_at %>
+      </p>
+    </div>
+
+    <div class="column">
+      <% if @adhesion.cotisations.any? %>
+        <p>
+          <p class="title is-5">Cotisations</p>
+
+          <div id="content" class="content">
+            <ul>
+              <% @adhesion.cotisations.each do |cotisation| %>
+                <li>
+                  <strong><%= cotisation.période %></strong> 
+                  :
+                  <%= number_to_currency(cotisation.montant) %>
+                  >
+                  <span class="tag is-medium is-light <%= cotisation.style %>"><%= cotisation.try(:workflow_state).try(:humanize) %></span> 
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <% if @adhesion.maison %>
+            <%= link_to 'Ajouter une Cotisation', new_cotisation_path(adhesion_id: @adhesion.id) %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="buttons has-grouped">
+  <%= button_to 'Complet', complet_adhesion_path(@adhesion), class: 'button is-warning is-outlined', title: "Passer à l'état 'Complet'. Le dossier est complet et les pièces jointes sont valides.", disabled: !@adhesion.can_complet? %>
+  <%= button_to 'Valider', valider_adhesion_path(@adhesion), class: 'button is-success is-outlined', data: { confirm: "Êtes-vous certain(e) de vouloir créer la maison, le contact à partir de cette demande d'adhésion et de notifier le demandeur ?" }, title: 'Créer la maison et les contacts', disabled: !@adhesion.can_valider? %>
+  <%= button_to 'Résilier', resilier_adhesion_path(@adhesion), class: 'button is-danger is-outlined', title: "Passer à l'état 'Résiliée'. La maison n'apparaîtra plus dans comme membre.", disabled: !@adhesion.can_résilier? %>
+  <%= button_to 'Archiver', archiver_adhesion_path(@adhesion), class: 'button', title: "Passer à l'état 'Archivée'. La maison n'est plus visible ???",data: { confirm: "Êtes-vous certain(e) de vouloir archiver la maison ? La maison ne sera plus visible sur la carte, et les contacts qui y sont liés n'auront plus le tag 'Membre'."}, disabled: !@adhesion.can_archiver? %>
+  <%= button_to 'Renouveler', renouveler_adhesion_path(@adhesion), class: 'button is-primary is-outlined', title: "Passer à l'état 'Renouvelée'.", disabled: !@adhesion.can_renouveler? %>
+</div>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_adhesion_path(@adhesion) %>
+  |
+  <%= link_to 'Retour', adhesions_path %>
+</div>

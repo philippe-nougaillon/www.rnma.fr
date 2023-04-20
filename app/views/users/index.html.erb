@@ -1,0 +1,45 @@
+<h1 class="title is-2">
+  <i class="fas fa-users"></i>
+  Utilisateurs
+</h1>
+
+<%= form_tag users_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: ['Non approuvé'] } %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+  
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Nom</th>
+        <th>Maison</th>
+        <th><%= sortable :admin do %>Admin<% end %></th>
+        <th><%= sortable :approved do %>Approuvé<% end %></th>
+        <th><%= sortable :created_at do %>Depuis<% end %></th>
+        <th><%= sortable :current_sign_in_at do %>Dernière<br>connexion<% end %></th>
+        <th><%= sortable :sign_in_count do %>Nombre<br>connexion<% end %></th>
+        <th><%= sortable :poids do %>Poids<% end %></th>
+        <th colspan=4></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @users %>
+    </tbody>
+
+    <tfoot>
+      <th colspan=13></th>
+    </tfoot>
+  </table>
+</div>
+
+<%= page_entries_info @users, entry_name: 'utilisateur' %>
+<%= paginate @users %>
+
+<%
+=begin%>
+ <%= link_to 'Export XLS', users_path(format: :xls), class: 'button' %> 
+<%
+=end%>

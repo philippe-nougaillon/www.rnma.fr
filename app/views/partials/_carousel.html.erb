@@ -1,0 +1,40 @@
+<section>
+  <div class="hero-head"></div>
+    <div id="carousel" class="hero-carousel">
+      <% cache @images do %>
+        <% @images.each_with_index do |item, index| %>
+          <% cache item do %>
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-covered">
+                  <%= link_to item.url, title: item.url do %>
+                    <%= image_tag item.image, width:'100%', height:'100%', alt:'Image #{ index } du slide', loading: 'lazy' %>
+                  <% end %>
+                </figure>
+              </div>
+              <div class="card-content">
+                <p class="title is-4 mb-4 has-text-centered is-color-primary">
+                  <%= item.titre %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="hero-foot"></div>
+</section>
+
+<script>
+  document.addEventListener("turbolinks:load", function () {
+    bulmaCarousel.attach('#carousel', {
+      slidesToScroll: 1,
+      slidesToShow: 1,
+      infinite: true,
+      autoplay: true,
+      duration: 2000,
+      autoplaySpeed: 5000,
+    });
+  })
+</script>

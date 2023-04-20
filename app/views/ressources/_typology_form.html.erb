@@ -1,0 +1,14 @@
+<div class="nested-form-wrapper" data-new-record="<%= typology.object.new_record? %>">
+  <div class="field has-addons">
+    <div class="control">
+      <%= typology.select :id, options_from_collection_for_select(Typology.reorder(:nom), :id, :nom, typology.object.id), hide_label: true %>
+    </div>
+    <div class="control">
+      <button title="Supprimer l'action" type="button" class="button" data-action="nested-form#remove">
+        <b>x</b>
+      </button>
+    </div>
+  </div>
+
+  <%= typology.hidden_field :_destroy if typology.object.id %>
+</div>

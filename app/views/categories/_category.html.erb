@@ -1,0 +1,5 @@
+<tr>
+  <td><%= category.nom %></td>
+  <td><%= link_to 'Modifier', edit_category_path(category) %></td>
+  <td><%= link_to '[X]', category, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

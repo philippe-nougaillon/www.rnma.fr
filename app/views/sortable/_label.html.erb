@@ -1,0 +1,18 @@
+<% if label.is_a?(Symbol) %>
+  <%= t label, scope: scope %>
+<% else %>
+  <%= label %>
+<% end %>
+
+<% if active %>
+  <% if direction == "asc" %>
+    <i class="fas fa-chevron-up rnma-orange"></i>
+  <% else %>
+    <i class="fas fa-chevron-down rnma-orange"></i>
+  <% end %>
+<% else %>
+  <small>
+    <i class="fas fa-chevron-up"></i>
+    <i class="fas fa-chevron-down"></i>
+  </small>
+<% end %>

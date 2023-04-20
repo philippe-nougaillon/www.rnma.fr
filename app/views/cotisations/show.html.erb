@@ -1,0 +1,53 @@
+
+<div class="box">
+  <p class="title is-3 mb-6">
+    <i class="fas fa-file-invoice"></i>
+    Cotisation 
+    <%= @cotisation.période %>
+    <%= Maison.unscoped.find(@cotisation.adhesion.maison_id).nom %>
+  </p>
+  <p>
+    <strong>Créée :</strong>
+    Il y a <%= time_ago_in_words @cotisation.created_at %>
+  </p>
+
+  <br>
+
+  <p>
+    <strong>Période :</strong>
+    <%= @cotisation.période %>
+  </p>
+
+  <p>
+    <strong>Montant :</strong>
+    <%= number_to_currency(@cotisation.montant) %>
+  </p>
+
+  <p>
+    <strong>Date échéance :</strong>
+    <%= l @cotisation.date_échéance if @cotisation.date_échéance %>
+  </p>
+  <br>
+
+  <p>
+    <strong>Etat :</strong>
+    <span class="tag is-medium is-light <%= @cotisation.style %>"><%= @cotisation.try(:workflow_state).try(:humanize) %></span> 
+  </p>
+  
+  <p>
+    <strong>Depuis :</strong>
+    <%= time_ago_in_words @cotisation.updated_at %>
+  </p>
+  <br>
+
+  <p>
+    <strong>Mémo :</strong>
+    <%= @cotisation.mémo %>
+  </p>
+</div>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_cotisation_path(@cotisation) %>
+  |
+  <%= link_to 'Retour', cotisations_path %>
+</div>

@@ -1,0 +1,37 @@
+<%= bulma_form_with(model: action, scope: :contact_action) do |form| %>
+  <% if action.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(action.errors.count, "erreur") %> empêche(nt) cette action d'être enregistrée !</h2>
+
+      <ul>
+        <% action.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id %>
+
+  <div class="columns">
+    <div class="column is-one-third">
+      <%= form.select :contact_id, options_from_collection_for_select(Contact.reorder(:nom).includes(:maison), 'id', 'nom_prénom_organisation', action.contact_id) %>
+      <%= form.text_field :intitulé %>
+      <div data-controller="action">
+        <span data-action="click->action#click">
+          <%= form.check_box :fait, data: {"action-target": "source"} %>
+        </span>
+        <div data-action-target="selector">
+          <%= form.date_field :date_rappel %>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <%= form.text_area :mémo %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

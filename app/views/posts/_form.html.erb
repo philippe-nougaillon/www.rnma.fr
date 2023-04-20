@@ -1,0 +1,90 @@
+<%= bulma_form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if current_user.membre? %>
+    <p class="subtitle is-5">
+      Entrez ci-dessous l'information que vous souhaitez partager.
+      <br>
+      Celle-ci ne sera visible sur le site qu'après validation par un membre de l'équipe du RNMA.
+    </p>
+    <%= form.text_field :titre, required: true %>
+  <% else %>
+    <%= form.text_field :titre, required: true %>
+    <%= form.text_field :chapeau, label: "Chapeau (uniquement visible sur une actu du réseau)" %>
+  <% end %>
+
+  <div class="box">
+    <p class="title is-4">
+      Images
+    </p>
+    <div class="columns">
+      <br>
+      <div class="column">
+        <%= form.label :vignette, class: 'has-text-weight-bold has-text-dark' %>
+        <p class="mb-3">
+          Ajouter une image pour l'aperçu de votre actualité en page d'accueil
+        </p>
+        <%= form.file_field :vignette %>
+        <% if post.vignette.attached? %>
+          <%= link_to 'Supprimer', delete_vignette_attachment_post_path(post),
+                        method: :delete,
+                        data: { confirm: 'Êtes-vous certain.e ?' } %>
+        <% end %>
+      </div>
+      <div class="column">
+        <%= form.label :poster, class: 'has-text-weight-bold has-text-dark' %>
+        <p class="mb-3">
+          Ajouter une image pour illustrer votre post
+        </p>
+        <%= form.file_field :poster %>
+        <% if post.poster.attached? %>
+          <%= link_to 'Supprimer', delete_poster_attachment_post_path(post),
+                        method: :delete,
+                        data: { confirm: 'Êtes-vous certain.e ?' } %>
+        <% end %>
+      </div>
+    </div>
+    <p class="mt-5">
+      <b>Astuce</b> : Pour supprimer une image, vous pouvez cliquer sur le bouton "choisir un fichier", puis sur "annuler" dans l'explorateur de fichier
+    </p>
+  </div>
+  <%= form.text_field :created_at, label: "Date de publication (pour pouvoir afficher l'actualité dans les plus récentes)", type: 'datetime-local', value: (post.created_at.strftime("%Y-%m-%dT%H:%M") if post.created_at), style: "width: 250px" %>
+  <br><br>
+  <%= form.text_area :contenu, id: "div_editor1", class: "content" %>
+  <p id="post-content"style="display: none"><%= post.contenu.body.to_html if post.contenu.body %></p>
+  <script>
+    var editor1 = new RichTextEditor("#div_editor1");
+    var content = document.getElementById("post-content");
+    editor1.setHTML(content.textContent); 
+  </script>
+
+  <div class="is-inline-block mb-4">
+    <%= form.check_box :membres, skip_label: true %>
+  </div>
+  <%= form.label :membres, "Cochez pour que l'actualité soit visible par les membres uniquement ?", class:"is-inline-block"%>
+
+  <% if current_user.admin? %>
+    <%= form.select :type_actu, options_for_select(Post.type_actus.keys, post.type_actu) %>
+
+    <div class="actions">
+      <%= form.submit 'Enregistrer', class: "button is-success" %>
+    </div>
+
+  <% else %>
+    <%= form.hidden_field :type_actu %>
+
+    <div class="actions">
+      <%= form.submit 'Enregistrer', class: "button is-success", data: { confirm: 'Êtes-vous certain.e de vouloir soumettre maintenant votre actualité à l\'équipe du RNMA ?' } %>
+    </div>
+
+  <% end %>
+<% end %>

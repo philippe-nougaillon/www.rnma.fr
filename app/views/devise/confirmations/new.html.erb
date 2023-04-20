@@ -1,0 +1,18 @@
+<h2 class="title is-2">Informations de confirmation non reçues ?</h2>
+
+<%= bulma_form_with(model: resource, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="columns">
+    <div class="column is-one-third">
+
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+
+      <div class="actions">
+        <%= f.submit "Me renvoyer les instructions de confirmation", class: "button is-link" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

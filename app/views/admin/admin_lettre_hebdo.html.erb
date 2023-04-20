@@ -1,0 +1,25 @@
+<h1 class="title is-2">
+  <i class="fas fa-envelope-open-text" style="color: grey"></i>
+  Lettre Hebdo
+</h1>
+
+<h2 class="subtitle is-4 mt-6 is-ibm">
+  Envoyer la lettre hebdo de TEST à : <br>
+  <%= User.testeurs.pluck(:email).join(', ') %>
+</h2>
+
+<%= link_to_if current_user.testeur?, "Envoyer aux #{User.testeurs.size} testeurs", admin_send_weekly_test_path, class: "button is-warning" %>
+
+<h2 class="subtitle is-4 mt-6 is-ibm">
+  Envoyer la VRAIE lettre hebdo aux <%= User.testeurs.size %> testeurs, à l'équipe et au CA
+</h2>
+
+<%= link_to_if current_user.testeur?, "Envoyer", admin_send_weekly_test_path(equipe: true), class: "button is-warning" %>
+
+<h2 class="subtitle is-4 mt-6 is-ibm">
+  Envoyer la VRAIE lettre hebdo aux 
+  <%= link_to @abonnés.count, contacts_path(abonnés: true), class: "is-antonio has-text-info", style: "text-decoration: underline" %>
+  abonnés
+</h2>
+
+<%= link_to_if current_user.admin?, "Envoyer", admin_send_lettre_hebdo_path, class: "button is-danger", data: { confirm: 'Êtes-vous certain(e) de vouloir envoyer à tous les abonnés la lettre hebdo ?' } %>

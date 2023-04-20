@@ -1,0 +1,122 @@
+<div class="container">
+  <%= image_tag 'LaFabrique.png', alt: 'logo RNMA' %>
+
+  <% if @events.any? %>
+    <h1 style="font-size: 2rem">Agenda</h1>
+    <ul>
+      <% @events.each do |event| %>
+        <li>
+          <h3>
+            <%= event.pretty_date(false) %> :
+            <%= event.titre %>
+          </h3>
+          <i><%= event.lieu %></i>
+          <br>
+          <%= link_to "En savoir plus", event %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @posts.réseau.any? %>
+    <h1 style="font-size: 2rem">Actus du Réseau</h1>
+    <ul>
+      <% @posts.réseau.each do |post| %>
+        <li>
+          <h3><%= link_to post.titre, post %></h3>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @posts.territoires.any? %>
+    <h1 style="font-size: 2rem">Échos des Territoires</h1>
+    <ul>
+      <% @posts.territoires.each do |post| %>
+        <li>
+          <h3><%= link_to post.titre, post %></h3>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @posts.secteur.any? %>
+    <h1 style="font-size: 2rem">Échos du monde associatif</h1>
+    <ul>
+      <% @posts.secteur.each do |post| %>
+        <li>
+          <h3><%= link_to post.titre, post %></h3>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @ressources.any? %>
+    <h1 style="font-size: 2rem">Ressources</h1>
+    <ul>
+      <% @ressources.each do |ressource| %>
+        <li>
+          <h3><%= ressource.titre %></h3>
+          <%= link_to "En savoir plus", ressource %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @forum_topics_reseau.any? %>
+    <h1 style="margin-bottom: 0; font-size: 2rem">Forum <%= @forum_topics_reseau.first.messageboard.name %></h1>
+    <p style="margin-top: 0"><i><%= truncate(@forum_topics_reseau.first.messageboard.description, length: 120) %></i></p>
+
+    <% @forum_topics_reseau.each do |forum_topic_reseau| %>
+      <%= render partial:"forum_topic", locals:{forum_topic: forum_topic_reseau} %>
+    <% end %>
+  <% end %>
+
+  <% if @forum_topics_vie_asso.any? %>
+    <h1 style="margin-bottom: 0; font-size: 2rem">Forum <%= @forum_topics_vie_asso.first.messageboard.name %></h1>
+    <p style="margin-top: 0"><i><%= truncate(@forum_topics_vie_asso.first.messageboard.description, length: 120) %></i></p>
+
+    <% @forum_topics_vie_asso.each do |forum_topic_vie_asso| %>
+      <%= render partial:"forum_topic", locals:{forum_topic: forum_topic_vie_asso} %>
+    <% end %>
+  <% end %>
+
+  <% if @forum_topics_equipages.any? %>
+    <h1 style="margin-bottom: 0; font-size: 2rem">Forum <%= @forum_topics_equipages.first.messageboard.name %></h1>
+    <p style="margin-top: 0"><i><%= truncate(@forum_topics_equipages.first.messageboard.description, length: 120) %></i></p>
+
+    <% @forum_topics_equipages.each do |forum_topic_equipages| %>
+      <%= render partial:"forum_topic", locals:{forum_topic: forum_topic_equipages} %>
+    <% end %>
+  <% end %>
+
+  <% if @forum_topics.any? %>
+    <% @forum_topics.each do |forum_topic| %>
+      <%= render partial:"forum_topic", locals:{forum_topic: forum_topic, show_messageboard_name: true} %>
+    <% end %>
+  <% end %>
+
+  <% unless @test_mode %>
+    <p>Cliquez <%= link_to "ici", unsubscribe_contacts_url(contact_email: @contact_email) %> pour se désabonner </p>
+  <% end %>
+
+</div>
+
+<footer style="background-color:#144c6d; padding: 1rem;">
+  <p style="font-weight: bold; margin: 0; color: white !important;">
+    Réseau Nationale des maisons d'associations
+  </p>
+  <small style="color: white !important;">
+    1 allée Monseigneur Jean-René Calloc'h
+    29000 QUIMPER
+    <br>
+    <%= link_to "https://www.rnma.fr/", "https://www.rnma.fr/", style: "color: white" %>
+  </small>
+  <br><br>
+  <a href="https://www.facebook.com/RNMAasso/" target="_blank" rel="noreferrer noopener" aria-label="Facebook" style="color: white">
+    <%= image_tag "facebook_logo.png", width: "30px" %>
+  </a>
+  <a href="https://twitter.com/RNMAsso" target="_blank" rel="noreferrer noopener" aria-label="Twitter" style="color: white">
+    <%= image_tag "twitter_logo.png", width: "30px" %>
+  </a>
+</footer>

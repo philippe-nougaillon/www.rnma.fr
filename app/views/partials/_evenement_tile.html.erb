@@ -1,0 +1,27 @@
+<div class="tile is-parent is-4">
+  <article class="box tile is-child evenement-tile">
+    <%= link_to evenement do %>
+      <p id="evenement-tile-date" class="title is-3 rnma-orange mb-5">
+        <%= evenement.pretty_date(false) %>
+      </p>
+      <p class="subtitle is-7 has-text-white">
+        <%= "(dans #{ time_ago_in_words(evenement.debut) })" %>
+      </p>
+      <h3 id="evenement-tile-titre" class="title is-4">
+        <%= evenement.titre %>
+      </h3>
+      <p class="subtitle is-6">
+        <i class="fas fa-map-marker-alt mt-2"></i>
+        <%= evenement.lieu %>
+      </p>
+      <p id="evenement-tile-chapeau" class="is-size-6 has-text-justified">
+        <%= strip_tags(evenement.chapeau) %>
+      </p>
+      <% if current_user.try(:admin?) %>
+        <%= link_to edit_evenement_path(evenement) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+  </article>
+</div>

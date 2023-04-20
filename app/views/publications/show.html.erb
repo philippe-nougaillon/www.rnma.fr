@@ -1,0 +1,56 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white is-spaced">
+      <%= @publication.titre %>
+    </h1>
+    <h2 class="subtitle is-3 has-text-white">
+      <%= @publication.chapeau %>
+    </h2>
+  </div>
+</section>
+
+<div class="box" data-controller="richtext">
+  <div class="columns">
+    <div class="column is-one-quarter">
+    <figure class="image mb-2">
+      <% if @publication.photo.attached? %>
+        <%= image_tag @publication.photo, width: '100%', height: '100%', alt: "photo de la publication '#{ @publication.titre }'" %>
+      <% else %>
+        <%= image_tag 'ressource_placeholder.webp', width: '100%', height: '100%', alt: "photo de remplacement de la publication '#{ @publication.titre }'" %>
+      <% end %>
+    </figure>
+    <%= render partial: 'partials/social_networks', locals: { url: publication_url(@publication) } %>
+  </div>
+
+    <div class="column">
+      <div id="content" class="content mb-6">
+        <%= raw @publication.contenu.body.to_html %>
+      </div>
+      <% if @publication.document.attached? %>
+        <%= link_to "Accéder à la publication", @publication.document, class: 'button is-link is-small' %>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<% if current_user.try(:admin?) %>
+  <hr>
+  <p>
+    Etat : 
+    <span class="tag is-medium is-light <%= @publication.style %>"><%= @publication.workflow_state.humanize %></span>
+  </p>
+  <br>
+
+  <div class="buttons is-grouped">
+    <%= button_to 'Publier', publier_publication_path(@publication), class: 'button is-success is-outlined', disabled: !@publication.can_publier? %>
+    <%= button_to 'Archiver', archiver_publication_path(@publication), class: 'button', disabled: !@publication.can_archiver? %>
+  </div>
+  <hr>
+
+  <div class="mb-6">
+    <%= link_to 'Modifier', edit_publication_path(@publication) %>
+    |
+    <%= link_to 'Retour', publications_path %>
+  </div>
+<% end %>

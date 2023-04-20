@@ -1,0 +1,1 @@
+PageTitleHelper.options[:app] = 'Réseau National des Maisons des Associations (RNMA)'

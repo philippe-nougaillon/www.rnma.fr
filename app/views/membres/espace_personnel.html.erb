@@ -1,0 +1,81 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white">
+      Espace personnel
+    </h1>
+  </div>
+</section>
+
+<div id="main-container">
+  <div id="main-content">
+    <div class="columns mb-6 is-centered">
+      <div>
+        <%= render partial:'membre_tools', locals: { title: "Actualité", text: "Postez une actualité de votre territoire (temps forts, dispositifs ou actions inspirantes à partager...)", button: "Créer une actualité", path: "new_post" } %>
+        <%= render partial:'membre_tools', locals: { title: "Ressource", text: "Publiez une ressource de votre territoire (article, fiches outils, documents divers...)", button: "Créer une ressource", path: "new_ressource" } %>
+      </div>
+      <div>
+        <%= render partial:'membre_tools', locals: { title: "Forum", text: "Dialoguez sur le forum avec les autres membres et l'équipe du RNMA", button: "Dialoguer", path: "thredded" } %>
+        <%= render partial:'membre_tools', locals: { title: "Ma MDA", text: "Voir et mettre à jour les informations de ma MDA (contacts, réseaux sociaux, etc.)", button: "Voir mes informations", path: "membres_maison" } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container is-fluid mb-6">
+  <h2 class="title is-2 has-text-centered">Mes Actualités</h2>
+  <div class="table-container">
+    <table class="table is-fullwidth">
+
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>État</th>
+          <th>Visibilité</th>
+          <th>MÀJ</th>
+          <th colspan=2></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        
+        <%= render partial: 'membre_post', collection: @posts, as: :post %>
+      </tbody>
+
+      <tfoot>
+        <tr><th colspan=6></tr>
+      <tfoot>
+      
+    </table>
+  </div>
+
+  <%
+=begin%>
+ <h2 class="title is-2 has-text-centered">Mes Ressources</h2>
+  <div class="table-container">
+    <table class="table is-hoverable is-striped is-fullwidth is-narrow">
+    
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Créateur</th>
+          <th>Tags</th>
+          <th>Membres?</th>
+          <th>Etat</th>
+          <th>MÀJ</th>
+          <th colspan=2></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= render @ressources %>
+      </tbody>
+
+      <tfoot>
+        <tr><th colspan=8></th></tr>
+      </tfoot>
+
+    </table>
+  </div> 
+<%
+=end%>
+</div>

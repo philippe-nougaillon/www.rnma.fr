@@ -1,0 +1,237 @@
+$color-primary : #27496B;
+$color-tertiary : #144C6D;
+$color-quaternary : #428BC7;
+
+
+//////// HOMEPAGE ////////
+
+#welcome-banner{
+  background-image: image-url("backgroundRNMA.webp");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  @media screen and (max-width: 769px) {
+    background-size: 200%;
+  }
+  
+
+  // garder le même padding que celui d'en dessous des 769px
+  @media screen and (min-width: 769px) {
+    #welcome-hero.hero-body {
+      padding: 3rem 1.5rem;
+    }
+  }
+
+  #welcome-hero.hero-body {
+    #main-title, #main-subtitle{
+      margin-left: 41.5%;
+      @media screen and (min-width: 1400px) {
+        margin-left: 45%;
+      }
+    }
+    
+    #main-title{
+      margin-top: 10%;
+      margin-bottom: 50px;
+      @media only screen and (max-width: 769px){
+        margin-top: 48vw;
+        margin-left: 0;
+      }
+      @media screen and (min-width: 1400px) {
+        margin-top: 12vw;
+      }
+    }
+    
+    #main-subtitle{
+      // 990px parce que c'est le moment où le mot 'RNMA' du titre passe sur la première, du coup sans ça, ça afficherais mal le sous-titre
+      @media screen and (max-width: 990px) {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+#membres-banner{
+  background-image: image-url("banner_espace_membre.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  
+  @media screen and (max-width: 769px) {
+    background-size: 200%;
+  }
+
+  // garder le même padding que celui d'en dessous des 769px
+  @media screen and (min-width: 769px) {
+    #membres-hero.hero-body{
+      padding: 3rem 1.5rem 50px 1.5rem;
+    }
+  }
+
+  #membres-hero.hero-body{
+    #main-columns.columns{
+      align-items: end;
+      // 697px parce que c'est le moment où le mot 'RNMA' du titre passe sur la première, du coup sans ça, ça afficherais mal le sous-titre
+      @media screen and (max-width: 769px) {
+        align-items: start;
+      }
+      @media screen and (max-width: 769px) {
+        display: flex;
+        flex-direction: column-reverse !important;
+      }
+      .column{
+        padding: 0;
+      }
+      #container-forum-link{
+        margin-top: 26%;
+        @media screen and (max-width: 769px) {
+          margin-top: 0;
+        }
+        #forum-link{
+          font-family: 'Antonio', sans-serif;
+          text-decoration: underline;
+          margin-top: 30%;
+          @media screen and (max-width: 769px) {
+            font-size: 16px !important;
+          }
+        }
+      }
+      
+      #main-title{
+        @media screen and (min-width: 769px) {
+          margin-top: 15%;
+          margin-bottom: 10vw;
+        }
+        @media screen and (max-width: 769px) {
+          margin-top: 55vw;
+          margin-bottom: 20px;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
+
+
+//// CAROUSEL ////
+
+#carousel{
+  overflow: hidden;
+  .card{
+    margin-left: 70px;
+    margin-right: 70px;
+    border-radius: 0;
+    box-shadow: none;
+    .card-image img{
+      border-radius: 0.5%;
+    }
+  }
+  .slider-pagination{
+    p{
+      margin-bottom: 30px;
+    }
+    .slider-page {
+      background-color: $color-primary;
+    }
+  }
+  .slider-navigation-previous, .slider-navigation-next{
+    background-color: $color-primary;
+    color: white;
+    svg{
+      margin-top: 2px;
+    }
+    @media screen and (max-width: 1024px) {
+      display: none;
+    }
+  }
+  .slider-navigation-previous{
+    margin-left: 15px;
+    svg{
+      margin-right: 2px;
+    }
+  }
+  .slider-navigation-next{
+    margin-right: 15px;
+    svg{
+      margin-left: 4px;
+    }
+  }
+
+  @media only screen and (max-width: 769px){
+    .card{
+      margin-left: 0px;
+      margin-right: 0px;
+      .card-content{
+        margin-top: 20px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 480px){
+    .slider-navigation-previous{
+      margin-left: 15px;
+    }
+    .slider-navigation-next{
+      margin-right: 15px;
+    }
+  }
+}
+
+  //// CAROUSEL
+
+//// HOMEPAGE
+
+
+//// PAGE RESSOURCE ////
+
+#main-container{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  overflow-wrap: break-word;
+
+  #development ul strong{
+    color: $color-primary;
+  }
+
+  h2.is-color-tertiary strong{
+    color: $color-tertiary;
+  }
+  
+  h3.is-color-quaternary strong{
+    color: $color-quaternary;
+  }
+
+  #main-content{
+    max-width: 1100px;
+
+    @media only screen and (max-width: 1200px){
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .is-desktop{
+      @media only screen and (max-width: 1200px) {
+        display: inline;
+        .column{
+          width: 100%;
+        }
+      }
+    }
+  }
+  .hero.is-very-small .hero-body{
+    padding: 0;
+    h2{
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+//// PAGE RESSOURCE
+
+
+//// PAGE MAISON ////
+
+#pin:focus-visible {
+  outline: none;
+}
+
+//// PAGE MAISON

@@ -1,0 +1,41 @@
+<%= bulma_form_with(model: message) do |form| %>
+  <section class="hero is-background-color-primary mb-6">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 has-text-white">
+        Nous Contacter
+      </h1>
+      <h2 class="subtitle is-3 has-text-white">
+        Vous avez une question ou vous souhaitez qu'un responsable du RNMA vous contacte ?
+      </h2>
+    </div>
+  </section>
+
+  <div class="column is-half is-offset-one-quarter">
+    <p class="subtitle is-6 mb-6 mt-3">
+      Si vous êtes une association locale et que vous cherchez 
+      des renseignements ou que vous avez des questions sur la gestion de votre association,
+      nous vous invitons à prendre contact directement avec une
+      <a href="/les_maisons#cartographie" style="text-decoration: underline">Maison des Associations</a>
+      près de chez vous, ou une structure référencée dans guid'Asso.
+    </p>
+    <h3 class="title is-6 is-color-primary">
+      Remplissez le formulaire ci-dessous et nous répondrons à votre demande dans les meilleurs délais.
+    </h3>
+    <%= form.text_field :nom, required: true, hide_label: true, placeholder: 'Nom*' %>
+    <%= form.text_field :structure, hide_label: true, placeholder: 'Structure' %>
+    <%= form.text_field :email, required: true, hide_label: true, placeholder: 'E-mail*' %>
+    <%= form.text_field :téléphone, hide_label: true, placeholder: 'Téléphone' %>
+    <%= form.text_area :message, required: true, hide_label: true, placeholder: 'Message*' %>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= form.text_field :tag_list, value: message.tag_list.join(', '), label: 'Tags' %>
+    <% end %>
+    <% if message.new_record? %>
+      <%= recaptcha_tags %>
+    <% end %>
+
+    <div class="actions my-6">
+      <%= form.submit 'Envoyer', class: 'button is-outlined is-background-color-primary' %>
+      <%= link_to 'Retour', root_path, class: 'button'%>
+    </div>
+  </div>
+<% end %>

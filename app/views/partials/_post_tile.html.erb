@@ -1,0 +1,28 @@
+<div class="tile is-parent <%= post_réseau ? 'is-4': 'is-3'%>">
+  <article class="box tile is-child post-tile">
+    <%= link_to post do %>
+        <figure class="image is-4by3">
+          <% if post.vignette.attached? %>
+            <%= image_tag post.vignette, style: 'object-fit: cover', width: '100%', height: '100%', alt: "image du post '#{ post.titre }'", loading: 'lazy' %>
+          <% else %>
+            <%= image_tag 'logo.webp', style: "opacity: 15%", height: '100%', alt: "image de remplacement du post '#{ post.titre }'", loading: 'lazy' %>
+          <% end %>
+        </figure>
+      <div class="pt-3">
+        <h3 class="title is-4">
+          <%= post.titre %>
+        </h3>
+        <% if post_réseau %>
+          <p class="subtitle is-6 has-text-justified">
+            <%= strip_tags(post.chapeau) %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+    <% if current_user.try(:admin?) %>
+      <%= link_to edit_post_path(post) do %>
+        <i class="fas fa-edit mr-3 mt-3"></i>
+      <% end %>
+    <% end %>
+  </article>
+</div>

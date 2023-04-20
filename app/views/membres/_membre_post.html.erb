@@ -1,0 +1,14 @@
+<tr>
+  <td><%= link_to truncate(post.titre, length: 100), post, class: "is-size-5 has-text-weight-bold" %></td>
+  <td>
+    <span class="tag is-medium is-light <%= post.style %>"><%= post.try(:workflow_state).try(:humanize) %></span> 
+  </td>
+  <td>
+    <span class="<%= post.membres? ? 'has-text-success' : 'has-text-danger'%>">
+      <%= post.membres? ? "Membres" : "Tous" %>
+    </span>
+  </td>
+  <td><%= time_ago_in_words post.updated_at %></td>
+  <td><%= link_to 'Modifier', edit_post_path(post) %></td>
+  <td><%= link_to '[X]', post, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

@@ -1,0 +1,160 @@
+<header>
+  <nav class="navbar is-fixed-top is-spaced <%= request.variant.include?(:desktop) ? 'has-shadow' : '' %> nav_front-size" role="navigation" aria-label="main navigation">
+
+    <div class="navbar-brand">
+      <div style="width: 80px">
+        <%= link_to (user_signed_in?) ? membres_index_path : root_path, 'aria-label': 'logo' do %>
+          <%= image_tag 'logo.webp', width: '100%', height: '100%', id: 'main-logo', alt: 'logo RNMA' %>
+        <% end %>
+      </div>
+
+      <a role="button" id="navbar-burger" class="navbar-burger burger mt-2" onclick="scrollFunction()" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div><!-- /navbar-brand -->
+
+    <div id="navbarBasicExample" class="navbar-menu">
+
+      <div id="navbar-front-start" class="navbar-start has-text-weight-bold">
+        <% unless request.variant.include?(:phone) %>
+          <p class="navbar-item">
+            Réseau National <br>
+            des Maisons d'Associations
+          </p>
+          <p>|</p>
+        <% end %>
+        
+        <% if user_signed_in? %>
+          <%= navbar_item 'welcome', membres_index_path, 'Accueil' %>
+        <% else %>
+          <%= navbar_item 'welcome', root_path, 'Accueil' %>
+        <% end %>
+        
+        <div class="navbar-item has-dropdown is-hoverable">
+          <%= navbar_item 'reseau', le_reseau_path, 'Réseau' %>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/le_reseau">
+              Présentation
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/le_reseau#nos_missions">
+              Nos Missions
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/le_reseau#projet_strategique">
+              Le Projet Stratégique
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/le_reseau#conseil_administration">
+              Le Conseil d'Administration
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/le_reseau#equipe_salariee">
+              L'équipe
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/le_reseau#partenaires">
+              Partenaires
+            </a>
+          </div>
+        </div>
+    
+        <div class="navbar-item has-dropdown is-hoverable">
+          <%= navbar_item 'maisons', les_maisons_path, 'Maisons' %>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/les_maisons">
+              Carte d'identité
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/les_maisons#fonctions">
+              Grandes Fonctions
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/les_maisons#cartographie">
+              Cartographie des membres de RNMA
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/les_maisons#liste">
+              Liste des maisons
+            </a>
+          </div>
+        </div>
+    
+        <%= navbar_item 'projets', nos_actions_path, 'Actions' %>
+        <%= navbar_item 'posts', actualites_path, 'Actualités' %>
+        <%= navbar_item 'evenements', agenda_path, 'Agenda' %>
+        <%= navbar_item 'ressources', les_ressources_path, 'Ressources' %>
+
+        <%= link_to recherche_path, { class: "navbar-item is-inline-block", id: "research", title: "Rechercher dans tout le site" } do %>
+          <i class="fas fa-search"></i>
+        <% end %>
+
+        <%= link_to new_message_path, { class: "navbar-item is-inline-block", title: "Une question ? N'hésitez pas à nous contacter via ce formulaire" } do %>
+          <i class="far fa-question-circle"></i>
+        <% end %>
+
+        <%= link_to newsletter_path, { class: "navbar-item is-inline-block", title: "S'inscrire à notre Newsletter" } do %>
+          <i class="fas fa-envelope-open-text"></i>
+        <% end %>
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to thredded_path, { class: "navbar-item is-inline-block", title: "Plateforme d'échanges" } do %>
+            <i class="far fa-comments"></i>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item has-text-weight-bold">
+          <div class="buttons">
+            <% unless user_signed_in? %>
+              <%= link_to "S'inscrire",
+                  new_user_registration_path, 
+                  class: "button is-link is-outlined is-small" 
+              %>
+              <%= link_to "Connexion", 
+                  new_user_session_path, 
+                  class: "button is-success is-outlined is-small" 
+              %>
+            <% else %>
+              <% if current_user.admin? %>
+                <%= link_to "Administration", 
+                    admin_index_path, 
+                    class: "button is-link is-outlined is-small" 
+                %>
+                <%= link_to "Déconnexion", 
+                    destroy_user_session_path, 
+                    method: :delete, 
+                    class: "button is-danger is-outlined is-small" 
+                %>
+              <% end %>
+            <% end %>
+          </div><!-- /buttons -->
+        </div><!-- /navbar-item -->
+        <% if user_signed_in? && current_user.membre? %>
+          <div class="navbar-item has-dropdown is-hoverable mr-3 is-color-primary">
+            <%= link_to membres_espace_personnel_path do %>
+              <span class="icon rnma-orange">
+                <i class="fas fa-crown"></i>
+              </span>
+              <span>
+                Espace personnel
+              </span>
+            <% end %>
+          </div>
+          <%= link_to "Déconnexion", 
+              destroy_user_session_path, 
+              method: :delete, 
+              class: "button is-danger is-outlined is-small" 
+          %>
+        <% end %>
+      </div><!-- /navbar-end -->
+
+    </div><!-- /navbar-menu -->
+
+  </nav>
+  <div style="height: 70px;">
+  </div>
+</header>

@@ -1,0 +1,51 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white is-spaced">
+      <%= @evenement.titre %>
+    </h1>
+    <h2 class="subtitle is-3 has-text-white">
+      <%= @evenement.pretty_date(true) %>
+    </h2>
+  </div>
+</section>
+
+
+<div id="main-container" data-controller="richtext">
+  <div id="main-content">
+
+    <figure class="image mb-2">
+      <%= image_tag @evenement.photo, width: '100%', height: '100%', alt: "photo de l'évènement '#{ @evenement.titre }'" if @evenement.photo.attached? %>
+    </figure>
+    
+    <h3 class="title is-6">
+      <i class="fas fa-map-marker-alt"></i>
+      <%= @evenement.lieu %>
+    </h3>
+    
+    <%= raw @evenement.contenu.body.to_html %>
+    <%= render partial: 'partials/social_networks', locals: { url: evenement_url(@evenement) } %>
+
+    <% if current_user.try(:admin?) %>
+      <hr>
+      <p>
+        Etat : 
+        <span class="tag is-medium is-light <%= @evenement.style %>"><%= @evenement.workflow_state.humanize %></span>
+      </p>
+      <br>
+
+      <div class="buttons is-grouped">
+        <%= button_to 'Publier', publier_evenement_path(@evenement), class: 'button is-success is-outlined', disabled: !@evenement.can_publier? %>
+        <%= button_to 'Promouvoir', promouvoir_evenement_path(@evenement), class: 'button is-warning is-outlined', disabled: !@evenement.can_promouvoir? %>
+        <%= button_to 'Archiver', archiver_evenement_path(@evenement), class: 'button', disabled: !@evenement.can_archiver? %>
+      </div>
+
+      <hr>
+      <div class="mb-6">
+        <%= link_to 'Éditer', edit_evenement_path(@evenement) %>
+        |
+        <%= link_to 'Retour', evenements_path %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

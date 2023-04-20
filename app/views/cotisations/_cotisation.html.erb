@@ -1,0 +1,24 @@
+<tr>
+    <td style="text-align: right"><%= link_to cotisation.id, cotisation %></td>
+    <td><%= Maison.unscoped.find(cotisation.adhesion.maison_id).nom %></td>
+    <td><%= Maison.unscoped.find(cotisation.adhesion.maison_id).type_structure %></td>
+    <td><%= Maison.unscoped.find(cotisation.adhesion.maison_id).ville %></td>
+    
+    <td><%= cotisation.période %></td>
+    <td style="text-align: right"><%= number_to_currency(cotisation.montant) %></td>
+    <td>
+        <% if cotisation.date_échéance %>
+            <span class="tag <%= (cotisation.date_échéance <= Date.today && cotisation.engagée?) ? 'is-danger is-light' : nil %>">
+                <%= l cotisation.date_échéance %>
+            </span>
+        <% end %>
+    </td>
+    <td>
+        <span class="tag is-small is-light <%= cotisation.style %>"><%= cotisation.try(:workflow_state).try(:humanize) %></span> 
+    </td>
+    <td><%= truncate(cotisation.mémo, length: 20) %></td>
+    <td><%= time_ago_in_words cotisation.updated_at %></td>
+    <td><%= link_to 'Voir', cotisation %></td>
+    <td><%= link_to 'Modifier', edit_cotisation_path(cotisation) %></td>
+    <td><%= link_to '[X]', cotisation, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

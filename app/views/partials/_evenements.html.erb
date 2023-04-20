@@ -1,0 +1,26 @@
+<div>
+  <h2 class="title is-1 has-text-centered is-color-quaternary my-6">
+    Agenda
+  </h2>
+  
+  <% if @evenements.any? %>
+    <div class="columns is-multiline">
+      <%= render partial: 'partials/evenement_tile', collection: @evenements, as: :evenement %>
+    </div>
+  <% else %>
+    <p class="subtitle has-text-centered">
+      Il n'y a aucun évènement de prévu pour l'instant.
+    </p>
+  <% end %>
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <%= link_to "Tous les événements", 
+            agenda_path, 
+            class: "button is-uppercase has-text-weight-bold is-background-color-primary is-medium is-centered is-outlined"
+        %>
+      </div>
+    </div>
+  </section>
+</div>

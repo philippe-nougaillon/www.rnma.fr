@@ -1,0 +1,30 @@
+<tr>
+    <td style="text-align: right"><%= link_to action.id, action %></td>
+    <td><%= link_to action.contact.nom_prénom, action.contact %></td>
+    <td>
+        <% if action.contact.maison_id %>
+            <%= Maison.unscoped.find(action.contact.maison_id).nom %>
+        <% else %>
+            <i>[<%= action.contact.organisation %>]</i>
+        <% end %>
+    </td>
+    <td><%= "il y a #{ time_ago_in_words(action.created_at) }" %></td>
+    <td><%= action.user.prénom %></td>
+    <td><%= action.intitulé %></td>
+    <td><%= action.fait_humanized %></td>
+    <td>
+        <% if action.date_rappel && !action.fait %>
+            <%= l action.date_rappel.to_date %>
+            <% if action.date_rappel >= DateTime.now %>
+                (dans
+            <% else %>
+                (il y a
+            <% end %> 
+            <%= time_ago_in_words action.date_rappel %>)
+        <% end %>
+    </td>
+    <td><%= time_ago_in_words action.updated_at %></td>
+    <td><%= link_to 'Voir', action %></td>
+    <td><%= link_to 'Modifier', edit_action_path(action) %></td>
+    <td><%= link_to '[X]', action, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

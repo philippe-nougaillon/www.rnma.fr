@@ -1,0 +1,95 @@
+<%= render 'partials/notification' %>
+<section class="hero is-background-color-primary">
+    <div class="hero-body has-text-centered">
+        <h1 class="title is-1 has-text-white">
+            Centre de Ressources
+        </h1>
+        <h2 class="subtitle is-2 has-text-white">
+            Panorama des productions du RNMA, de ses membres et partenaires 
+        </h2>
+    </div>
+</section>
+
+<div class="columns">
+    <div class="column is-one-quarter p-6">
+        <%= form_tag centre_ressources_path, method: :get do %>
+
+            <div class="field has-addons">
+                <div class="control">
+                    <%= text_field_tag :search, 
+                                        params[:search], 
+                                        class: "input is-small is-rounded is-info", 
+                                        placeholder: "Entrez un terme" %>
+                </div>
+            </div>
+            <br>
+
+            <p class="title is-6">
+                Catégories
+            </p>
+
+            <% Category.where(id: CategoriesRessource.pluck(:category_id).uniq).each do | category | %>
+                <%= check_box_tag   "[categories_id][#{ category.id }]",
+                                    '1', 
+                                    params[:categories_id] ? params[:categories_id].keys.include?(category.id.to_s) : false,
+                                    onchange: 'this.form.submit()' 
+                                    %>
+                <%= category.nom %>
+                <br>
+            <% end %>
+            <br>
+
+            <p class="title is-6">
+                Typologies
+            </p>
+
+            <% Typology.where(id: RessourcesTypology.pluck(:typology_id).uniq).each do | typology | %>
+                <%= check_box_tag   "[typologies_id][#{ typology.id }]",
+                                    '1', 
+                                    params[:typologies_id] ? params[:typologies_id].keys.include?(typology.id.to_s) : false,
+                                    onchange: 'this.form.submit()' 
+                                    %>
+                <%= typology.nom %>
+                <br>
+            <% end %>
+            <br>
+
+            <p class="title is-6">
+                Tags
+            </p>
+            <%= render partial: 'partials/tag_list', locals: { tags: Ressource.tag_counts.order('taggings_count DESC') } %>
+            <br>
+
+            <p class="title is-6">
+                Maisons
+            </p>
+
+            <% Maison.where(id: MaisonsRessource.pluck(:maison_id).uniq).each do | maison | %>
+                <%= check_box_tag   "[maisons_id][#{ maison.id }]",
+                                    '1',
+                                    params[:maisons_id] ? params[:maisons_id].keys.include?(maison.id.to_s) : false,
+                                    onchange: 'this.form.submit()'
+                                    %>
+                <%= maison.nom %>
+                <br>
+            <% end %>
+            <br>
+
+        <% end %>
+    </div>
+    <div class="ressources mt-6">
+        <% if @ressources.any? %>
+            <div class="columns is-multiline <%= request.variant.include?(:phone) ? 'my-6 mx-2' : 'mx-6' %>">
+                <%= render partial: 'partials/ressource_tile', collection: @ressources, as: :ressource %>
+            </div>
+        <% else %>
+            <p class="subtitle mt-6">
+                Oups ! Aucune ressource trouvée avec le terme 
+                <%= "'#{ params[:search] }'" %>...
+                <%= link_to "Annuler le filtre", centre_ressources_path %>
+            </p>
+        <% end %>
+    </div>
+</div>
+
+<%= paginate @ressources, theme: 'front', outer_window: 1, window: 2 %>

@@ -1,0 +1,21 @@
+<tr>
+    <td style="text-align: right"><%= link_to adhesion.id, adhesion %></td>
+    <td>
+        <% if adhesion.maison_id %>
+            <%= Maison.unscoped.find(adhesion.maison_id).nom %>
+        <% else %>
+            <i>[<%= adhesion.organisme %>]</i>
+        <% end %>
+    </td>
+    <td><%= adhesion.type_structure %></td>
+    <td><%= adhesion.cp %></td>
+    <td><%= adhesion.ville %></td>
+    <td><%= adhesion.nom %></td>
+    <td>
+        <span class="tag is-small is-light <%= adhesion.style %>"><%= adhesion.try(:workflow_state).try(:humanize) %></span> 
+    </td>
+    <td><%= time_ago_in_words adhesion.updated_at %></td>
+    <td><%= link_to 'Voir', adhesion %></td>
+    <td><%= link_to 'Modifier', edit_adhesion_path(adhesion) %></td>
+    <td><%= link_to '[X]', adhesion, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

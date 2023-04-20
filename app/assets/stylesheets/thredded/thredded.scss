@@ -1,0 +1,89 @@
+$color-primary : #27496B;
+$color-tertiary : #144C6D;
+$color-quaternary : #428BC7;
+$rnma-blue : #27496B;
+$rnma-orange : #F2AD3E;
+
+#yield{
+  padding-top: 35px;
+}
+.thredded--main-container {
+  margin: 20px 10% 0 20%;
+  max-width: none;
+  padding: 0;
+  @media (max-width: 400px){
+    margin: 10px;
+  }
+}
+div#thredded--container{
+  min-height: 100vh;
+  background: white;
+  border-radius: 5px;
+  padding-left: 4.5rem;
+  padding-right: 4.5rem;
+  max-width: 47.125rem;
+  @media (max-width: 1024px){
+    padding: 10px;
+    max-width: 100%;
+  }
+}
+.thredded--main-container{
+  margin: 0;
+}
+h1.thredded--topic-header--title{
+  color: $color-primary;
+}
+h2.thredded--messageboard--title{
+  font-size: 21px;
+  color: $color-quaternary !important;
+}
+h3 a, h2.thredded--messageboard--title, .thredded--navigation-breadcrumbs a, h1.thredded--topics--title a, h1.thredded--topic-header--title{
+  font-weight: 900 !important;
+}
+h3 a.thredded--link{
+  color: black;
+  font-family: 'IBM Plex Sans', serif;
+}
+a.thredded--button{
+  color: white !important;
+  background-color: $color-quaternary;
+}
+
+.thredded--user-navigation--moderation--pending-count, .thredded--user-navigation--private-topics--unread{
+  background-color: #dc1717 !important;
+}
+.thredded--button{
+  background-color: $color-quaternary !important;
+}
+
+.thredded--topic-header--edit-topic{
+  color : $color-quaternary !important;
+}
+
+.thredded--username{
+  color: $color-tertiary !important;
+}
+
+.thredded--nav-text, .thredded--moderation-navigation--item a:hover, .thredded--user-navigation--item, .thredded--topics--updated-by a, .thredded--topics--messageboard a, .thredded--topics--title a, .thredded--topic-header--follow-info form input[type=submit], .thredded--topic-header--follow-info form button, .thredded--topic-header--started-by a, .thredded--topic-header--participants--participant > a, .thredded--post--content--spoiler--summary, .thredded--post--content a, .thredded--post--user a, .thredded--post--topic a, .thredded--post--user-and-topic a, .thredded--messageboard, .thredded--post-moderation-record--content-changed-notice a, .thredded--post-moderation-record--moderation-state-notice a {
+  color: $color-primary !important;
+}
+
+.thredded--link, .thredded--navigation-breadcrumbs a{
+  color: $rnma-orange !important;
+  &:hover{
+    color: $color-primary !important;
+  }
+}
+
+ul li a.thredded--link{
+  color: $color-primary !important;
+}
+
+.thredded--messageboard {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5em 1em -0.125em whitesmoke, 0 0px 0 1px whitesmoke;
+  color: #4a4a4a;
+  max-width: 100%;
+  position: relative;
+}

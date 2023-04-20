@@ -1,0 +1,20 @@
+<div class="nested-form-wrapper" data-new-record="<%= action.object.new_record? %>">
+  <%= action.hidden_field :user_id, value: current_user.id %>
+  <div class="field has-addons">
+    <div class="control is-expanded">
+      <%= action.label :intitulé, class: 'has-text-weight-bold has-text-dark' %>
+      <%= action.text_field :intitulé, hide_label: true %>
+    </div>
+    <div class="control is-expanded">
+      <%= action.label :mémo, class: 'has-text-weight-bold has-text-dark' %>
+      <%= action.text_field :mémo, hide_label: true %>
+    </div>
+    <div class="control">
+      <br>
+      <button title="Supprimer l'action" type="button" class="button" data-action="nested-form#remove">
+        <b>x</b>
+      </button>
+    </div>
+  </div>
+  <%= action.hidden_field :_destroy %>
+</div>

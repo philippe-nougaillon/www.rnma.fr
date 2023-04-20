@@ -1,0 +1,98 @@
+<div id="<%= maison.id %>" class="tile is-parent is-6">
+  <article class="box tile is-child maison-tile">
+    <div class="columns">
+      <div class="column is-one-third">
+        <figure id="maison-tile-image">
+          <% if maison.logo.attached? %>
+            <%= image_tag maison.logo, width: '100%', height: '100%', alt: "logo de la maison '#{ maison.nom }'", loading: 'lazy' %>
+          <% else %>
+            <%= image_tag 'logo.webp', style: "opacity: 25%", width: '100%', height: '100%', alt: "logo de remplacement de la maison '#{ maison.nom }'", loading: 'lazy' %>
+          <% end %>
+        </figure>
+      </div>
+
+      <div class="column">
+        <p class="title is-4">
+          <%= link_to_if user_signed_in?, maison.nom, membres_maison_path(id: maison.id) %>
+        </p>
+        <p class="has-text-weight-bold is-size-6 mb-4">
+          <%= maison.ville %>
+        </p>
+        <p>
+          <%= maison.adresse %>
+        </p>
+        <p>
+          <%= maison.cp[0..4] %>
+          <%= maison.ville %>
+        </p>
+        <p class="is-size-6 mt-3">
+          <% unless maison.site.blank? %>
+            <%= link_to URI.parse(maison.site).host, maison.site, target: '_blank', rel:"noreferrer noopener", 'aria-label': 'Site de la maison' %>
+          <% end %>
+        </p>
+
+        <p class="is-size-6">
+          <%= maison.téléphone %>
+        </p>
+        <p class="is-size-6">
+          <%= mail_to maison.email %>
+        </p>
+        <div class="has-text-rigth mt-3">
+          <% unless maison.facebook.blank? %>
+              <%= link_to maison.facebook, target: '_blank', class: 'social-network', rel:"noreferrer noopener", 'aria-label': 'Facebook de la maison' do %>
+                <i class="is-size-4 fab fa-facebook m-2"></i>
+              <% end %>
+          <% end %>
+          
+          <% unless maison.twitter.blank? %>
+                <%= link_to maison.twitter, target: '_blank', class: 'social-network', rel:"noreferrer noopener", 'aria-label': 'Twitter de la maison' do%>
+                  <i class="is-size-4 fab fa-twitter m-2"></i>
+                <% end %>
+          <% end %>
+
+          <% unless maison.linkedin.blank? %>
+              <%= link_to maison.linkedin, target: '_blank', class: 'social-network', rel:"noreferrer noopener", 'aria-label': 'Linkdein de la maison' do %>
+                <i class="is-size-4 fab fa-linkedin-in m-2"></i>
+              <% end %>
+          <% end %>
+
+          <% unless maison.youtube.blank? %>
+            <%= link_to maison.youtube, target: '_blank', class: 'social-network', rel:"noreferrer noopener", 'aria-label': 'Youtube de la maison' do %>
+              <i class="is-size-4 fab fa-youtube m-2"></i>
+            <% end %>
+          <% end %>
+
+          <% unless maison.instagram.blank? %>
+            <%= link_to maison.instagram, target: '_blank', class: 'social-network', rel:"noreferrer noopener", 'aria-label': 'Instagram de la maison' do %>
+              <i class="is-size-4 fab fa-instagram m-2"></i>
+            <% end %>
+          <% end %>
+
+          <% unless maison.newsletter.blank? %>
+            <%= link_to maison.newsletter, target: '_blank', class: 'social-network', rel:"noreferrer noopener", 'aria-label': 'Newsletter de la maison' do %>
+              <i class="is-size-4 fas fa-envelope-open-text m-2"></i>
+            <% end %>
+          <% end %>
+
+          <% ressources_publiées_count = MaisonsRessource.where(maison_id: maison.id).count %>
+          <% if ressources_publiées_count > 0 %>
+            <%= link_to les_ressources_path(maisons_id: {maison.id => true}), id: 'ressource', title: "Voir toutes les ressources publiées par ce membre"  do %>
+              <div class="tags has-addons mr-3 mt-3">
+                <span class="tag is-link is-light">
+                  <%= 'Ressource'.pluralize(ressources_publiées_count) %>
+                  <%= 'publiée'.pluralize(ressources_publiées_count) %>
+                </span>
+                <span class="tag is-success"><%= ressources_publiées_count %></span>
+              </div>
+            <% end %>
+          <% end %> 
+        </div>
+        <% if current_user.try(:admin?) %>
+          <%= link_to edit_maison_path(maison) do %>
+            <i class="fas fa-edit" style="float: right"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </article>
+</div>

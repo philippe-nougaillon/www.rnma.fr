@@ -1,0 +1,17 @@
+<div style="<%= current_user.admin ? '' : 'margin-left: 160px; margin-right: 160px; margin-top: 15px' %>">
+  <p class="title is-2">
+    Modifier une actualité
+  </p>
+
+  <%= render 'form', post: @post %>
+
+  <div class="mb-6">
+    <%= link_to 'Voir', @post %>
+    |
+    <% if current_user.admin %>
+      <%= link_to 'Retour sur la liste des posts', posts_path %>
+      |
+    <% end %>
+    <%= link_to 'Retour sur l\'espace membre', membres_index_path %>
+  </div>
+</div>

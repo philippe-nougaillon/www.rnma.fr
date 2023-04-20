@@ -1,0 +1,105 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white is-spaced">
+      <%= @ressource.titre %>
+    </h1>
+    <h2 class="subtitle is-3 has-text-white">
+      <%= @ressource.chapeau %>
+    </h2>
+  </div>
+</section>
+
+<div class="columns mx-<%= request.variant.include?(:desktop) ? 6 : 2 %>" data-controller="richtext">
+  <div class="column">
+    <%= raw @ressource.corps.body.to_html %>
+  </div>
+
+  <div class="column is-one-quarter mb-3">
+    <div id="content" class="content box">
+
+      <% if @ressource.categories.any? %>
+        <p>
+          <strong>Catégories</strong>
+          <br>
+          <%= @ressource.categories.pluck(:nom).join(', ') %>
+        </p>
+      <% end %>
+
+      <% if @ressource.typologies.any? %>
+        <p>
+          <strong>Typologies</strong> 
+          <br>
+          <%= @ressource.typologies.pluck(:nom).join(', ') %>
+        </p>
+      <% end %>
+
+      <% if @ressource.maisons.any? %>
+        <p>
+          <strong>Maisons</strong>
+          <br>
+          <%= @ressource.maisons.pluck(:nom).join(', ') %>
+        </p>
+      <% end %> 
+
+      <% if @ressource.documents.attached? %>
+        <div id="content" class="content">
+          <p>
+            <strong>Document(s)</strong>
+            <br>
+            <ul>
+              <% @ressource.documents.each do |doc| %>
+                  <li><%= link_to doc.filename, doc, target: '_blank' %></li>
+              <% end %>
+            </ul>
+          </p>
+        </div>
+        <br>
+      <% end %>
+
+      <p>
+        <strong>Date de publication</strong>
+        <br>
+        <%= l(@ressource.date_publication) if @ressource.date_publication %>
+      </p>
+
+      <p>
+        <strong>Tags</strong>
+        <br>
+        <%= render partial: 'partials/tag_list', locals: { tags: @ressource.tags } %>
+      </p>
+
+      <% if current_user.try(:admin?) %>
+        <p>
+          <strong>Etat</strong> 
+          <br>
+          <span class="tag is-light <%= @ressource.style %>"><%= @ressource.workflow_state.humanize %></span>
+        </p>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+<% if current_user.try(:admin?) %>
+  <hr>
+  <p>
+    <strong>Etat :</strong> 
+    <span class="tag is-medium is-light <%= @ressource.style %>"><%= @ressource.workflow_state.humanize %></span>
+  </p>
+  <br>
+
+  <div class="buttons is-grouped">
+    <%= button_to 'Valider', valider_ressource_path(@ressource), class: 'button is-success is-outlined', disabled: !@ressource.can_valider? %>
+    <%= button_to 'Publier', publier_ressource_path(@ressource), class: 'button is-danger is-outlined', disabled: !@ressource.can_publier? %>
+    <%= button_to 'Partager', partager_ressource_path(@ressource), class: 'button is-link is-outlined', disabled: !@ressource.can_partager? %>
+    <%= button_to 'Promouvoir', promouvoir_ressource_path(@ressource), class: 'button is-warning is-outlined', disabled: !@ressource.can_promouvoir? %>
+    <%= button_to 'Archiver', archiver_ressource_path(@ressource), class: 'button', disabled: !@ressource.can_archiver? %>
+  </div>
+
+  <hr>
+  <div class="mb-6">
+    <%= link_to 'Modifier', edit_ressource_path(@ressource) %>
+    |
+    <%= link_to 'Retour', ressources_path %>
+  </div>
+
+<% end %>

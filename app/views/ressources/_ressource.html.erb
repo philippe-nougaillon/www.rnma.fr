@@ -1,0 +1,18 @@
+<tr>
+  <td><%= link_to ressource.titre, ressource %></td>
+  <td><%= ressource.audits.first.user.prénom_nom %></td>
+  <td>
+    <%= render partial: 'partials/tag_list', locals: { tags: ressource.tags } %>
+  </td>
+  <td>
+    <span class="<%= ressource.membres? ? 'has-text-success' : 'has-text-danger'%>">
+      <%= t ressource.membres? %>
+    </span>
+  </td>
+  <td>
+    <span class="tag is-medium is-light <%= ressource.style %>"><%= ressource.try(:workflow_state).try(:humanize) %></span> 
+  </td>
+  <td><%= time_ago_in_words(ressource.updated_at) %></td>
+  <td><%= link_to 'Modifier', edit_ressource_path(ressource) %></td>
+  <td><%= link_to '[X]', ressource, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

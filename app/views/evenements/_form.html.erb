@@ -1,0 +1,62 @@
+<%= bulma_form_with(model: evenement) do |form| %>
+  <% if evenement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(evenement.errors.count, "error") %> prohibited this evenement from being saved:</h2>
+
+      <ul>
+        <% evenement.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :debut, type: 'datetime-local', value: (evenement.debut ? evenement.debut.strftime("%Y-%m-%dT%H:%M") : DateTime.now().strftime("%Y-%m-%dT%H:%M")), required: true, style: "width: 250px" %>
+
+  <p>
+    Mettre les mêmes valeurs dans la date de fin si on n'a pas besoin de ce dernier
+  </p>
+  <%= form.text_field :fin, type: 'datetime-local', value: (evenement.fin ? evenement.fin.strftime("%Y-%m-%dT%H:%M") : DateTime.now().strftime("%Y-%m-%dT%H:%M")), required: true, style: "width: 250px" %>
+
+  <%= form.text_field :titre, required: true %>
+
+  <%= form.text_field :chapeau, required: true %>
+
+  <%= form.text_field :lieu, required: true %>
+
+  <%= form.label :photo, class: 'has-text-weight-bold has-text-dark' %>
+  <%= form.file_field :photo %>
+  <% if evenement.photo.attached? %>
+    <%= link_to 'Supprimer', delete_image_attachment_evenement_path(evenement),
+                  method: :delete,
+                  data: { confirm: 'Êtes-vous certain.e ?' } %>
+  <% end %>
+
+  <%= form.number_field :poids %>
+  <br><br>
+  
+  <%= form.text_area :contenu, id: "div_editor1" %>
+
+  <p id="evenement-content"style="display: none">
+
+    <%= evenement.contenu.body.to_html if evenement.contenu.body %>
+
+  </p>
+
+  <script>
+
+    var editor1 = new RichTextEditor("#div_editor1");
+
+    var content = document.getElementById("evenement-content");
+
+    editor1.setHTML(content.textContent); 
+
+  </script>
+
+  <%= form.check_box :publique %>
+  <%= form.check_box :membres %>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

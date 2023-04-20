@@ -1,0 +1,38 @@
+<p>
+  <strong>Titre :</strong>
+  <%= @slideshow_image.titre %>
+</p>
+
+<p>
+  <strong>Poids :</strong>
+  <%= @slideshow_image.poids %>
+</p>
+
+<p>
+  <strong>Lien URL :</strong>
+  <%= @slideshow_image.url %>
+</p>
+<p>
+  <strong>Publique :</strong>
+  <span class="<%= @slideshow_image.publique? ? 'has-text-success' : 'has-text-danger'%>">
+    <%= t @slideshow_image.publique? %>
+  </span>
+</p>
+<p>
+  <strong>Membres :</strong>
+  <span class="<%= @slideshow_image.membres? ? 'has-text-success' : 'has-text-danger'%>">
+    <%= t @slideshow_image.membres? %>
+  </span>
+</p>
+<br>
+
+<p>
+  <%= image_tag @slideshow_image.image %>
+</p>
+<br>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_slideshow_image_path(@slideshow_image) %>
+  |
+  <%= link_to 'Retour', slideshow_images_path %>
+</div>

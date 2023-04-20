@@ -1,0 +1,155 @@
+<div class="box">
+  <p class="title is-3 mb-6">
+    <i class="fas fa-hotel"></i>
+    <%= page_title!(@maison.nom) %>
+  </p>
+  <div class="columns">
+    <div class="column">
+      <p>
+        <strong>Structure :</strong>
+        <%= @maison.type_structure %>
+      </p>
+      <br>
+      <p>
+        <strong>Adresse</strong>
+        <br>
+        <%= @maison.adresse %>
+        <br>
+        <p class="is-inline-block">
+          <%= @maison.cp %>
+        </p>
+        <p class="has-text-weight-bold is-inline-block">
+          <%= @maison.ville %>
+        </p>
+        (<%= @maison.dep_name %>)
+        <br>
+        <strong>Région :</strong>
+        <%= @maison.region_name %>
+      </p>
+
+      <br>
+
+      <p>
+        <strong>Téléphone :</strong>
+        <%= @maison.téléphone %>
+      </p>
+
+      <p>
+        <strong>Email :</strong>
+        <%= mail_to @maison.email, @maison.email %>
+      </p>
+
+      <p>
+        <strong>Site :</strong>
+        <% unless @maison.site.blank? %>
+          <%= link_to_if @maison.site, URI.parse(@maison.site).host, @maison.site, target: '_blank' %>
+        <% end %>
+      </p>
+      <br>
+
+      <% unless @maison.facebook.blank? %>
+        <p>
+          <strong>Facebook :</strong>
+          <%= link_to URI.parse(@maison.facebook).path, @maison.facebook, target: '_blank' %>
+        </p>
+      <% end %>
+
+      <% unless @maison.twitter.blank? %>
+        <p>
+          <strong>Twitter :</strong>
+          <%= link_to URI.parse(@maison.twitter).path, @maison.twitter, target: '_blank' %>
+        </p>
+      <% end %>
+
+      <% unless @maison.linkedin.blank? %>
+        <p>
+          <strong>LinkedIn :</strong>
+          <%= link_to URI.parse(@maison.linkedin).path, @maison.linkedin, target: '_blank' %>
+        </p>
+      <% end %>
+
+      <% unless @maison.youtube.blank? %>
+        <p>
+          <strong>Youtube :</strong>
+          <%= link_to URI.parse(@maison.youtube).path, @maison.youtube, target: '_blank' %>
+        </p>
+      <% end %>
+
+      <% unless @maison.instagram.blank? %>
+        <p>
+          <strong>Instagram :</strong>
+          <%= link_to URI.parse(@maison.instagram).path, @maison.instagram, target: '_blank' %>
+        </p>
+      <% end %>
+
+      <% unless @maison.newsletter.blank? %>
+        <p>
+          <strong>Newsletter :</strong>
+          <%= link_to URI.parse(@maison.newsletter).host, @maison.newsletter, target: '_blank' %>
+        </p>
+      <% end %>
+
+      <br>
+
+      <p class="mb-3">
+        <strong>Adhésion :</strong>
+        <% if @maison.adhesion %>
+          <span class="tag is-medium is-light <%= @maison.adhesion.style %>">
+            <%= @maison.adhesion.workflow_state.humanize %>
+          </span>
+          (depuis <%= time_ago_in_words @maison.adhesion.updated_at %>)
+          |
+          <%= link_to 'Détails', @maison.adhesion %>
+        <% end %>
+      </p>
+      <p>
+        <strong>Cotisation :</strong>
+        <% if @maison.cotisations.any? %>
+          <span class="tag is-medium is-light <%= @maison.cotisations.last.style %>">
+            <%= @maison.cotisations.last.workflow_state.humanize %>
+          </span>
+          (depuis <%= time_ago_in_words @maison.cotisations.last.updated_at %>)
+          |
+          <%= link_to 'Détails', @maison.cotisations.last %>
+        <% end %>
+      </p>
+    </div>
+
+    <div class="column">
+      <p class="title is-5">Contacts</p>
+
+      <div id="content" class="content">
+        <ul>
+          <% @maison.contacts.each do |contact| %>
+            <li><%= link_to contact.prénom_nom, contact %> > <%= contact.fonction %></li>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if @maison.actions.any? %>
+        <%= render partial: 'partials/actions', locals: { actions: @maison.actions } %>
+      <% end %>
+
+    </div>
+  </div>
+  <% unless @maison.description.blank? %>
+    <p>
+      <strong>Mémo</strong>
+      <%= simple_format @maison.description %>
+    </p>
+    <br>
+  <% end %>
+
+  <% unless @maison.corps.blank? %>
+    <strong>Contenu</strong>
+    <div id="content" class="content">
+      <%= raw @maison.corps.body.to_html %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_maison_path(@maison) %>
+  |
+  <%= link_to 'Retour', maisons_path %>
+</div>

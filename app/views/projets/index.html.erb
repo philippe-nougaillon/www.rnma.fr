@@ -1,0 +1,37 @@
+<h1 class="title is-2">
+  <i class="fas fa-drafting-compass"></i>
+  Projets(Actions)
+</h1>
+
+<%= form_tag projets_path, method: :get do %>
+  <%= render partial: 'partials/search' %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+  
+    <thead>
+      <tr>
+        <th></th>
+        <th>Titre</th>
+        <th>Chapeau</th>
+        <th>Etat</th>
+        <th>Document</th>
+        <th>Poids</th>
+        <th colspan=2></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @projets %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=8></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<%= page_entries_info @projets, entry_name: 'projet' %>
+<%= paginate @projets %>

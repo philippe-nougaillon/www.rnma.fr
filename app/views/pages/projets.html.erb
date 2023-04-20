@@ -1,0 +1,17 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white">
+    Nos Actions
+    </h1>
+  </div>
+</section>
+
+<div id="main-container">
+  <div id="main-content">
+    <div class="columns is-multiline mb-6">
+      <%= render partial: 'partials/projet_tile', collection: @projets, as: :projet %> 
+    </div>
+  </div>
+</div>
+
+<%= paginate @projets, theme: 'front', outer_window: 1, window: 2 %>

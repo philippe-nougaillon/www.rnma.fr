@@ -1,0 +1,99 @@
+<%= bulma_form_with(model: adhesion, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }) do |form| %>
+  
+  <div class="columns">
+    <div class="column">
+
+      <% if adhesion.errors.any? %>
+        <div class="notification is-danger is-light">
+          <h2><%= pluralize(adhesion.errors.count, "erreur") %> empêche l'enregistrement !</h2>
+          <button class="delete"></button>
+          <ul>
+            <% adhesion.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form.text_field :organisme, label: 'Nom de votre structure', required: true %>
+
+      <%= form.select :type_structure, ['Associative', 'Collectivité'], label: 'Type de structure' %>
+
+      <%= form.text_field :adresse, required: true %>
+      
+      <div class="columns">
+        <div class="column is-one-third">
+          <%= form.text_field :cp, label: 'Code postal', required: true %>
+        </div>
+        <div class="column">
+          <%= form.text_field :ville, required: true %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="column">
+      <%= form.text_field :nom, label: 'Votre nom', required: true %>
+      <%= form.text_field :prénom, label: 'Votre prénom', required: true %>
+      <%= form.text_field :fonction, required: true %>
+      <div class="columns">
+        <div class="column">
+          <%= form.text_field :téléphone, required: true %>
+        </div>
+        <div class="column">
+          <%= form.text_field :email, required: true %>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <p class="title is-4">Documents</p>
+
+      <div id="content" class="content">
+        <% if @adhesion.documents.any? %>
+          <ul>
+            <% @adhesion.documents.each do | document | %>
+              <% if document.fichier.attached? %>
+                <li>
+                  <%= link_to document.fichier.filename, url_for(document.fichier), target: '_blank' %>
+                  <%= link_to '[X]', document, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <template data-nested-form-target="template">
+        <%= form.fields_for :documents, Document.new, child_index: 'NEW_RECORD' do |document_fields| %>
+          <%= render "document_form", document: document_fields %>
+        <% end %>
+      </template>
+
+      <!-- Inserted elements will be injected before that target. -->
+      <div data-nested-form-target="target"></div>
+
+      <button type="button" class="button is-primary mb-6" data-action="nested-form#add">
+        Ajouter document
+      </button>
+
+    </div>
+  </div>
+
+  <% if adhesion.new_record? %>
+    <article class="message is-info">
+      <div class="message-header">
+        <p>Information</p>
+      </div>
+      <div class="message-body">
+        Cette demande d'adhésion va être <strong>soumise à approbation </strong> du RNMA.<br>
+        Une fois votre adhésion validée, vous recevrez un email de confirmation ainsi que votre identifiant et mot de passe. 
+      </div>
+    </article>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit "Envoyer ma demande d'adhésion", class: 'button is-success' %>
+    <%= link_to 'Annuler', root_path, class: 'button' %>
+  </div>
+<% end %>

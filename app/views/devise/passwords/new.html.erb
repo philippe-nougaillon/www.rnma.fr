@@ -1,0 +1,22 @@
+<div id="main-container" style='background-image: url(/backgroundRNMA3.png);background-size: 100%;background-repeat: no-repeat;'>
+  <div id="main-content">
+    <div id="connexion">
+      <h1 class="title is-2 is-color-primary has-text-centered">Mot de passe oublié ?</h1>
+      <hr>
+      <%= bulma_form_with(model: resource, local: true, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <div class="columns">
+          <div class="column">
+
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+
+            <div class="actions">
+              <%= f.submit "Envoyez-moi les instructions", class: "button is-link" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

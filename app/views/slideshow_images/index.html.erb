@@ -1,0 +1,41 @@
+<h1 class="title is-2">
+  <i class="fas fa-images"></i>
+  Carrousel (Slideshow Images)
+</h1>
+
+<table class="table">
+
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Publique?</th>
+      <th>Membres?</th>
+      <th>Poids</th>
+      <th colspan=3></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @slideshow_images %>
+  </tbody>
+
+  <tfoot>
+    <tr><th colspan=7></th></tr>
+  </tfoot>
+
+</table>
+
+<% if @slideshow_images.where(publique: true).count < 2 %>
+  <p class="has-text-danger">
+    <b>Attention !</b> Il faut au moins deux images publiques pour que le carousel s'affiche sur la page d'accueil !
+  </p>
+<% end %>
+<% if @slideshow_images.where(membres: true).count < 2 %>
+  <p class="has-text-danger">
+    <b>Attention !</b> Il faut au moins deux images membres pour que le carousel s'affiche dans l'espace membre !
+  </p>
+<% end %>
+
+<br>
+
+<%= link_to 'Nouvelle Image', new_slideshow_image_path, class:'button is-success' %>

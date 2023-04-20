@@ -1,0 +1,41 @@
+<h1 class="title is-2">
+  <i class="fas fa-book"></i>
+  Ressources
+</h1>
+
+<%= form_tag ressources_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: Ressource.workflow_spec.states.keys.to_a } %>
+<% end %>
+
+<%= render partial: 'partials/tag_list', locals: { tags: Ressource.tag_counts.order('taggings_count DESC') } %>
+<br>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth is-narrow">
+  
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Créateur</th>
+        <th>Tags</th>
+        <th>Membres?</th>
+        <th>Etat</th>
+        <th>MÀJ</th>
+        <th colspan=2></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @ressources %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=8></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<%= page_entries_info @ressources, entry_name: 'ressource' %>
+<%= paginate @ressources %>
+

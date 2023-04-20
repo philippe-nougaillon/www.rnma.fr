@@ -1,0 +1,29 @@
+<h1 class="title"><%= @action_name %></h1>
+
+<%= bulma_form_with url: do_action_contacts_path do |form| %>
+    <%= hidden_field_tag :ids, @contacts_id %>
+    <%= hidden_field_tag :action_name, @action_name %>
+    
+    <div id="content" class="content">
+        <ul>
+            <% @contacts_id.each do | id | %>
+                <% contact = Contact.find(id) %>
+                <li><%= contact.nom_prénom_organisation %></li>
+            <%end %>
+        </ul>
+    </div>
+    
+    <div class="columns">
+        <div class="column is-4">
+            <% if @action_name == 'Supprimer' %>
+                <%= check_box_tag :confirmation %> 
+                Je confirme la suppression de <%= @contacts_id.size %> contact(s) 
+            <% elsif @action_name == 'Ajouter un tag' %>
+                <%= form.text_field :tag %>
+            <% end %>
+        </div>
+    </div>
+
+    <%= form.submit 'Valider', class: 'button is-danger' %>
+
+<% end %>

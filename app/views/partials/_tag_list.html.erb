@@ -1,0 +1,14 @@
+<div class="control">
+    <div class="tags">
+        <% tags.each do |tag| %>
+            <span class="tag is-rounded is-light">
+                <%= link_to tag, url_for(tagged_with: tag.name) %>
+                <% if params[:tagged_with] == tag.name %>
+                    <%= link_to url_for(tagged_with: nil) do %>
+                        <button class="delete is-small"></button>
+                    <% end %>
+                <% end %>
+            </span>
+        <% end %>
+    </div>
+</div>

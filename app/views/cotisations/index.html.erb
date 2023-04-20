@@ -1,0 +1,45 @@
+<h1 class="title is-2">
+  <i class="fas fa-file-invoice"></i>
+  Cotisations
+</h1>
+
+<%= form_tag cotisations_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: Cotisation.workflow_spec.states.keys.to_a, show_new_button: false } %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+  
+    <thead>
+      <tr>
+        <th><%= sort_link 'cotisations.id', 'ID' %></th>
+        <th><%= sort_link 'maisons.nom', 'Maison' %></th>
+        <th><%= sort_link 'maisons.type_structure', 'Type' %></th>
+        <th><%= sort_link 'maisons.ville', 'Ville' %></th>
+        <th><%= sort_link 'cotisations.période', 'Période' %></th>
+        <th><%= sort_link 'cotisations.montant', 'Montant' %></th>
+        <th><%= sort_link 'cotisations.date_échéance', 'Échéance' %></th>
+        <th><%= sort_link 'cotisations.workflow_state', 'État' %></th>
+        <th><%= sort_link 'cotisations.mémo', 'Mémo' %></th>
+        <th><%= sort_link 'cotisations.updated_at', 'MÀJ' %></th> 
+        <th colspan=3></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @cotisations.includes(:maison) %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=13></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<%= page_entries_info @cotisations, entry_name: 'cotisation' %>
+<%= paginate @cotisations %>
+
+<div class="mb-6">
+  <%= link_to 'Export XLS', url_for(params.permit(:search, :state).merge(format: :xls)) %> 
+</div>

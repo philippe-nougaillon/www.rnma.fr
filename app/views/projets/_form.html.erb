@@ -1,0 +1,56 @@
+<%= bulma_form_with(model: projet) do |form| %>
+  <% if projet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(projet.errors.count, "error") %> prohibited this projet from being saved:</h2>
+
+      <ul>
+        <% projet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :titre %>
+  <%= form.text_field :chapeau %>
+  <%= form.text_field :thème %>
+  <%= form.label :photo, class: 'has-text-weight-bold has-text-dark' %>
+  <%= form.file_field :photo %>
+  <% if projet.photo.attached? %>
+    <%= link_to 'Supprimer', delete_photo_attachment_projet_path(projet),
+                  method: :delete,
+                  data: { confirm: 'Êtes-vous certain.e ?' } %>
+  <% end %>
+  <%= form.label :document, class: 'has-text-weight-bold has-text-dark mt-3' %>
+  <%= form.file_field :document %>
+  <% if projet.document.attached? %>
+    <%= link_to 'Supprimer', delete_document_attachment_projet_path(projet),
+                  method: :delete,
+                  data: { confirm: 'Êtes-vous certain.e ?' } %>
+  <% end %>
+  <br><br>
+  <%= form.number_field :poids %>
+
+  <%= form.text_area :contenu, id: "div_editor1" %>
+
+  <p id="projet-content"style="display: none">
+
+    <%= projet.contenu.body.to_html if projet.contenu.body %>
+
+  </p>
+
+  <script>
+
+    var editor1 = new RichTextEditor("#div_editor1");
+
+    var content = document.getElementById("projet-content");
+
+    editor1.setHTML(content.textContent); 
+
+  </script>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+
+<% end %>

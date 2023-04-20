@@ -1,0 +1,134 @@
+<div id="main-container">
+  <div id="main-content">
+    <div id="content" class="content box m-6">
+      <div class="columns">
+        <div class="column is-one-third">
+          <% if @maison.logo.attached? %>
+            <%= image_tag @maison.logo, width: '100%', height: '100%', alt: "logo de la maison '#{ @maison.nom }'", loading: 'lazy' %>
+          <% end %>
+        </div>
+        <div class="column is-two-third">
+          <p class="title is-3 mb-6">
+            <%= page_title!(@maison.nom) %>
+          </p>
+          <p>
+            <%= @maison.adresse %>
+            <p class="is-inline-block">
+              <%= @maison.cp %>
+            </p>
+            <p class="has-text-weight-bold is-inline-block">
+              <%= @maison.ville %>
+            </p>
+          </p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column">
+          <p>
+            <strong>Structure :</strong>
+            <%= @maison.type_structure %>
+          </p>
+          <p>
+            <strong>Département :</strong>
+            <%= @maison.dep_name %>
+          </p>
+          <p>
+            <strong>Région :</strong>
+            <%= @maison.region_name %>
+          </p>
+          <p>
+            <strong>Téléphone :</strong>
+            <%= @maison.téléphone %>
+          </p>
+            <strong>Email :</strong>
+            <%= mail_to @maison.email, @maison.email %>
+          </p>
+
+          <p class="mb-3">
+            <strong>Adhésion :</strong>
+            <% if @maison.adhesion %>
+              <span class="tag is-medium is-light <%= @maison.adhesion.style %>">
+                <%= @maison.adhesion.workflow_state.humanize %>
+              </span>
+            <% end %>
+          </p>
+          <p>
+            <strong>Cotisation :</strong>
+            <% if @maison.cotisations.any? %>
+              <span class="tag is-medium is-light <%= @maison.cotisations.last.style %>">
+                <%= @maison.cotisations.last.workflow_state.humanize %>
+              </span>
+            <% end %>
+          </p>
+        </div>
+
+        <div class="column">
+          <p>
+            <strong>Site :</strong>
+            <% unless @maison.site.blank? %>
+              <%= link_to_if @maison.site, URI.parse(@maison.site).host, @maison.site, target: '_blank' %>
+            <% end %>
+          </p>
+          <% unless @maison.facebook.blank? %>
+            <p>
+              <strong>Facebook :</strong>
+              <%= link_to @maison.facebook, @maison.facebook, target: '_blank' %>
+            </p>
+          <% end %>
+
+          <% unless @maison.twitter.blank? %>
+            <p>
+              <strong>Twitter :</strong>
+              <%= link_to @maison.twitter, @maison.twitter, target: '_blank' %>
+            </p>
+          <% end %>
+
+          <% unless @maison.linkedin.blank? %>
+            <p>
+              <strong>LinkedIn :</strong>
+              <%= link_to @maison.linkedin, @maison.linkedin, target: '_blank' %>
+            </p>
+          <% end %>
+
+          <% unless @maison.youtube.blank? %>
+            <p>
+              <strong>Youtube :</strong>
+              <%= link_to @maison.youtube, @maison.youtube, target: '_blank' %>
+            </p>
+          <% end %>
+
+          <% unless @maison.instagram.blank? %>
+            <p>
+              <strong>Instagram :</strong>
+              <%= link_to @maison.instagram, @maison.instagram, target: '_blank' %>
+            </p>
+          <% end %>
+
+          <% unless @maison.newsletter.blank? %>
+            <p>
+              <strong>Newsletter :</strong>
+              <%= link_to URI.parse(@maison.newsletter).host, @maison.newsletter, target: '_blank' %>
+            </p>
+          <% end %>
+
+        </div>
+      </div>
+
+      <% unless @maison.corps.blank? %>
+        <div id="content" class="content" data-controller="richtext">
+          <%= @maison.corps %>
+        </div>
+      <% end %>
+
+      <% if current_user.admin || (@maison == current_user.mda) %>
+        <%= link_to "Modifier", edit_maison_path(@maison), class: 'button is-info mb-6 has-text-weight-bold' %>
+      <% end %>
+
+      <p class="title is-3">Contacts</p>
+
+      <div id="content" class="content">
+        <%= render partial: 'partials/maison_contact', collection: @contacts, as: :contact %>
+      </div>
+    </div>
+  </div>
+</div>

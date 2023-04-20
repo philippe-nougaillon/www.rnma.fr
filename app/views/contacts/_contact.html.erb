@@ -1,0 +1,36 @@
+<tr>
+    <td>
+        <span data-action="click->action#click">
+            <%= check_box_tag "[contacts_id][#{contact.id}]", 'yes', false,  data: { "action-target": "source" } %>
+        </span>
+    </td>
+    <td style="text-align: right"><%= link_to contact.id, contact %></td>
+    <td><%= link_to contact.nom, contact %></td>
+    <td><%= contact.prénom %></td>
+    <td><%= truncate(contact.fonction, length: 20) %></td>
+    <td><%= truncate(contact.maison.nom, length: 20) if contact.maison %></td>
+    <td><%= truncate(contact.organisation, length: 20) %></td>
+    <td><%= contact.ville %></td>
+    <td><%= contact.tag_list %></td>
+    <td>
+        <span class="<%= contact.abonne? ? 'has-text-success' : 'has-text-danger'%>">
+            <%= t contact.abonne? %>
+        </span>
+    </td>
+    <td>
+        <% if contact.actions.size > 0 %>
+            <%= contact.actions.first.intitulé %>
+            <%= ". Il y a #{ time_ago_in_words(contact.actions.first.created_at) }" %>
+        <% end %>
+    </td>
+    <td><%= time_ago_in_words contact.updated_at %></td>
+    <td><%= link_to 'Modifier', edit_contact_path(contact) %></td>
+    <td>
+        <% if contact.maison %>
+            <%= link_to '+Contact', edit_maison_path(contact.maison) %>
+        <% else %>
+            <%= link_to '+Contact', new_contact_path(organisation: contact.organisation) %>
+        <% end %>
+    </td>
+    <td><%= link_to '[X]', contact, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

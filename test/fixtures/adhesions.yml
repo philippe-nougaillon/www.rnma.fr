@@ -1,0 +1,26 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+la_maison_des_tests:
+  id: 1
+  maison: La Maison Des Tests
+  adresse: MyString
+  cp: MyString
+  ville: MyString
+  nom: MyString
+  prénom: MyString
+  téléphone: MyString
+  email: email@gmail.com
+  workflow_state: MyString
+  fonction: PDG
+
+two:
+  maison: two
+  organisme: MyString
+  adresse: MyString
+  cp: MyString
+  ville: MyString
+  nom: MyString
+  prénom: MyString
+  téléphone: MyString
+  email: MyString
+  workflow_state: MyString

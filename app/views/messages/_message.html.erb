@@ -1,0 +1,10 @@
+<tr>
+  <td><%= message.nom %></td>
+  <td><%= message.structure %></td>
+  <td><%= mail_to message.email, message.email, {subject: "Re: Votre message au RNMA", body: "#{'_' * 50} \r\n #{message.message}"} %></td>
+  <td><%= link_to truncate(message.message, length: 300), message %></td>
+  <td><span class="tag is-medium is-light is-<%= message.style %>"><%= message.try(:workflow_state).try(:humanize) %></span> </td>
+  <td><%= message.tag_list %></td>
+  <td><%= time_ago_in_words message.updated_at %></td>
+  <td><%= link_to '[X]', message, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

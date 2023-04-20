@@ -1,0 +1,58 @@
+// Place all the styles related to the Admin controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+$rnma-blue : #27496B;
+$rnma-orange : #F2AD3E;
+$color-tertiary : #144C6D;
+
+li i{
+  width: 25px;
+}
+
+//// ADMIN/INDEX ////
+
+#admin-table{
+  svg {
+    color: $color-tertiary;
+  }
+  a {
+    color: $rnma-blue;
+  }
+
+  td {
+    vertical-align: middle;
+    padding: 1rem;
+    &:first-child{
+      text-align: center;
+    }
+  }
+  .fa-search, .fa-envelope-open-text{
+    transition: none;
+    &:hover{
+      transform: none;
+    }
+  }
+}
+
+// ce code n'a pas le même effet que #admin-table svg{}, celui-là est pour les logos des titres
+h1, p{
+  svg{
+    color: $rnma-orange;
+    &.fa-search, &.fa-envelope-open-text{
+      color: $rnma-orange;
+      transition: none;
+      &:hover{
+        transform: none;
+      }
+    }
+  }
+  
+}
+
+
+div.table-container th{
+  white-space: nowrap;
+}
+
+//// ADMIN/INDEX

@@ -1,0 +1,17 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white">
+      L'Agenda
+    </h1>
+  </div>
+</section>
+
+<div id="main-container">
+  <div id="main-content">
+    <div class="columns is-multiline mb-6">
+      <%= render partial: 'partials/evenement_tile', collection: @evenements, as: :evenement %>
+    </div>
+  </div>
+</div>
+
+<%= paginate @evenements, theme: 'front', outer_window: 1, window: 2 %>

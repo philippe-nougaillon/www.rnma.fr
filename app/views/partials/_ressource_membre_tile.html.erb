@@ -1,0 +1,51 @@
+<div class="tile is-parent is-6">
+  <article class="box tile is-child ressource-tile">
+    <div class="columns m-1">
+      
+      <div class="column is-one-quarter">
+        <%= link_to ressource do %>
+          <figure class="image is-96x96">
+            <% if ressource.photo.attached? %>
+              <%= image_tag ressource.photo, width: '100%', height: '100%', alt: "photo de la ressource '#{ ressource.titre }'" %>
+            <% else %>
+              <%= image_tag 'ressource_placeholder.webp', style: "opacity: 25%", width: '100%', height: '100%', alt: "photo de remplacement de la ressource '#{ ressource.titre }'" %>
+            <% end %>
+          </figure>
+        <% end %>
+        <% if current_user.try(:admin?) %>
+          <%= link_to edit_ressource_path(ressource) do %>
+            <i class="fas fa-edit mt-3"></i>
+          <% end %>
+        <% end %> 
+      </div>
+
+      <div class="column">
+        <%= link_to ressource do %>
+          <p class="title is-4 has-text-weight-bold">
+            <%= ressource.titre %>
+          </p>
+          
+          <% if ressource.categories.any? %>
+            <p class="subtitle is-6 has-text-weight-bold mb-3 mt-3">
+              <%= ressource.categories.pluck(:nom).first %>
+              / 
+              <%= ressource.created_at.year %>
+            </p>
+          <% end %>
+          <p class="is-size-6 has-text-justified mb-4">
+            <%= ressource.description %>
+          </p>
+          <p>
+            <% ressource.tags.each do |tag| %>
+              <%= link_to url_for(tagged_with: tag.name) do %>
+                <span class="tag is-rounded">
+                  <%= tag %>
+                </span>
+              <% end %>
+            <% end %>
+          </p> 
+        <% end %>
+      </div>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,32 @@
+<div class="tile is-parent is-6">
+  <article class="box tile is-child projet-tile">
+    <%= link_to projet do %>
+      <div class="columns m-1">
+        <div class="column is-one-third mr-3">
+          <figure class="image is-256x256">
+            <% if projet.photo.attached? %>
+              <%= image_tag projet.photo, width: '100%', height: '100%', alt: "photo de la projet '#{ projet.titre }'", loading: 'lazy' %>
+            <% end %>
+          </figure>
+        </div>
+
+        <div class="column">
+          <p class="is-size-6 has-text-danger mb-3">
+            <%= projet.thème %>
+          </p>
+          <h3 class="title is-4">
+            <%= projet.titre %>
+          </h3>
+          <p class="subtitle is-5">
+            <%= projet.chapeau %>
+          </p>
+        </div>
+      </div>
+      <% if current_user.try(:admin?) %>
+        <%= link_to edit_projet_path(projet) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+  </article>
+</div>

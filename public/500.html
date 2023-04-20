@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Problème serveur (Erreur 500) - RNMA</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;700&family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff">
+  <meta name="apple-mobile-web-app-title" content="RNMA">
+  <meta name="application-name" content="RNMA">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    body{
+      height: 100vh;
+      background-image: url("/http-erreurs-500-.jpg");
+      background-size: 45%;
+      background-position: 0% 15%;
+      background-repeat: no-repeat;
+      display: flex;
+    }
+    img#logo{
+      width: 10vw;
+      margin-top: 3%;
+      margin-left: 10%;
+    }
+    div#content{
+      margin-top: 5%;
+      margin-left: 33%;
+    }
+    h1,h2,p{
+      color: #27496B;
+    }
+    h1{
+      margin-top: 15%;
+      margin-bottom: 50px;
+    }
+
+    p{
+      font-size: 24px;
+    }
+
+    @media screen and (max-width: 769px) {
+      body{
+        background-position: 75% 5%;
+      }
+      img#logo{
+        width: 30vw;
+        margin-top: 5%;
+        margin-left: 0;
+      }
+      body{
+        flex-direction: column;
+      }
+      div#content{
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+    @media screen and (min-width: 1503px) {
+      img#logo{
+        margin-top: 10%;
+        margin-left: 25%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="/">
+    <img id="logo" src="/logo.webp" alt="logo RNMA"></img>
+  </a>
+  <div id="content">
+    <h1>Aïe! <br>Le serveur a rencontré un problème inattendu qui l'empêche de répondre à la requête.</h1>
+    <h2>Essayez de rafraichir la page, et si le problème persiste, n'hésitez pas à nous contacter.</h2>
+    <br><br>
+    <p>
+      Cliquez 
+      <a href="/">ici</a>
+      ou sur le logo pour revenir à la page d'accueil.
+    </p>
+  </div>
+  
+</body>
+</html>

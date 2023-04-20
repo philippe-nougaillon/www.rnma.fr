@@ -1,0 +1,20 @@
+<% if defined?(show_messageboard_name) %>
+  <h1 style="margin-bottom: 0; font-size: 2rem">
+    Forum <%= forum_topic.messageboard.name %>
+  </h1>
+  <p style="margin-top: 0"><i><%= truncate(forum_topic.messageboard.description, length: 120) %></i></p>
+<% end %>
+
+<div style="margin-left: 2em">
+  <h3 style="font-size: 1.5rem">
+    <%= forum_topic.title %> :
+  </h3>
+  <div style="margin-left: 2em">
+    <% forum_topic.posts.where("created_at > (now() - interval '7 days')").each do |forum_post| %>
+      <%= image_tag forum_post.user.gravatar_hash, style: "border-radius: 50%; width: 30px;", title: forum_post.user.prénom_nom %>
+      <p style="display: inline;"><%= truncate(forum_post.content, length: 100) %></p>
+      <br>
+    <% end %>
+    <small><%= link_to "En savoir plus", "https://rnma.fr/forum/" + forum_topic.messageboard.slug, style: "margin-left: 33px" %></small>
+  </div>
+</div>

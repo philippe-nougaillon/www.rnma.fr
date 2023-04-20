@@ -1,0 +1,93 @@
+<div id="pre-footer">
+  <%= image_tag 'backgroundRNMA2.webp', id: 'footer-img', width: '100%', alt: 'bandeau du bas de page', loading: 'lazy' %>
+</div>
+
+<footer>
+  <div class="columns is-vcentered mx-4 pt-6 <%= request.variant.include?(:phone) ? 'has-text-centered' : '' %>">
+    <div id="footer-head" class="column is-one-third-desktop">
+      <%= image_tag 'logo.webp', class: "image #{request.variant.include?(:phone) ? 'mb-3' : 'mb-6'}", width: 96, height: 103, alt: 'logo RNMA', loading: 'lazy' %>
+      <p class="has-text-weight-bold is-size-5">
+        Réseau National des Maisons des Associations
+      </p>
+      <p class="pb-5 is-size-6 my-3">
+        1 allée Mgr Jean-Renée Calloc'h
+        <br>
+        29000 Quimper
+      </p>
+      <div id="footer-social-network">
+        <a href="https://www.facebook.com/RNMAasso/" target="_blank" rel="noreferrer noopener" aria-label="Facebook">
+          <i class="fab fa-facebook fa-2x"></i>
+        </a>
+        <a href="https://twitter.com/RNMAsso" target="_blank" rel="noreferrer noopener" aria-label="Twitter">
+          <i class="fab fa-twitter fa-2x"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCX-SE-AvqteYfgv1cNA0o2w" target="_blank" rel="noreferrer noopener" aria-label="Youtube">
+          <i class="fab fa-youtube fa-2x"></i>
+        </a>
+        <%= link_to newsletter_path, title: "S'inscrire à notre Newsletter" do %>
+          <i class="fas fa-envelope-open-text fa-2x"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="columns is-mobile <%= request.variant.include?(:phone) ? 'is-half' : 'is-one-quarter' %> is-variable">
+      <div class="column">
+        <ul class="menu-list is-size-6">
+          <li>
+            <%= link_to 'Réseau', le_reseau_path, id:'reseau_footer' %>
+          </li>
+          <li>
+            <%= link_to 'Maisons', les_maisons_path, id:'maisons_footer' %>
+          </li>
+          
+          <li>
+            <%= link_to 'Actions', nos_actions_path, id:'actions_footer' %>
+          </li> 
+          <li>
+            <%= link_to 'Actualités', actualites_path, id:'actualite_footer' %>
+          </li>
+          <li>
+            <%= link_to 'Agenda', agenda_path, id:'agenda_footer' %>
+          </li>
+          <li>
+            <%= link_to 'Ressources', les_ressources_path, id: 'ressources_footer' %>
+          </li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <ul class="menu-list is-size-6">
+          <li>
+            <%= link_to "Rechercher", recherche_path, id: 'rechercher_footer' %>
+          </li>
+
+          <li>
+            <%= link_to "Contact", new_message_path, id: 'nous_contacter_footer' %>
+          </li>
+          <li>
+            <%= link_to "Newsletter", newsletter_path, id: 'newsletter_footer' %>
+          </li>
+          <% unless user_signed_in? %>
+            <li>
+              <%= link_to "Connexion", new_user_session_path, id: 'connexion_footer' %>
+            </li>
+            <li>
+              <%= link_to "S'inscrire", new_user_registration_path, id: 'inscription_footer' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div id="partenaires_fi" class="column">
+      <div class="columns is-mobile is-multiline is-vcentered">
+        <%= render partial: 'partials/partenaire_fi', collection: Partenaire.financier %>
+      </div>
+    </div>
+  </div>
+
+  <p class="p-5 is-size-6">
+    RNMA © Tous droits réservés - v1.11 -
+    <%= link_to 'Mentions légales', mentions_legales_path, id:"confidentialite" %>
+  </p>
+</footer>

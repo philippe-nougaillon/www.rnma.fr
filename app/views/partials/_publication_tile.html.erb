@@ -1,0 +1,34 @@
+<div class="tile is-parent is-4">
+  <article class="box tile is-child publication-tile">
+    <%= link_to publication do %>
+      <div class="columns m-1">
+        <div class="column is-one-third mr-3">
+          <figure class="image">
+            <% if publication.photo.attached? %>
+              <%= image_tag publication.photo, width: '100%', height: '100%', alt: "photo de la publication '#{ publication.titre }'" %>
+            <% else %>
+              <%= image_tag 'ressource_placeholder.webp', width: '100%', height: '100%', alt: "photo de remplacement de la publication '#{ publication.titre }'" %>
+            <% end %>
+          </figure>
+        </div>
+
+        <div class="column">
+          <p class="subtitle is-5 has-text-weight-bold has-text-danger">
+            <%= publication.thème %>
+          </p>
+          <p class="title is-4 has-text-weight-bold">
+            <%= publication.titre %>
+          </p>
+          <p class="is-size-6 has-text-justified">
+            <%= truncate(publication.chapeau, length: 100) %>
+          </p>
+        </div>
+      </div>
+      <% if current_user.try(:admin?) %>
+        <%= link_to edit_publication_path(publication) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+  </article>
+</div>

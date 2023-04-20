@@ -1,0 +1,11 @@
+<% cache partenaire_fi do %>
+  <div class="column is-half-mobile is-one-third-desktop has-text-centered">
+    <% if partenaire_fi.logo.attached? %>
+      <figure class="image is-inline-block is-96x96" id='partenaire-fi-logo'>
+        <%= link_to partenaire_fi.lien, target: '_blank' do %>
+          <%= image_tag partenaire_fi.logo, width: '100%', height: '100%', alt: "logo du partenaire '#{ partenaire_fi.nom }'", title: "Cliquez ici pour visiter le site de notre partenaire '#{partenaire_fi.nom}' : #{ partenaire_fi.lien}", loading: 'lazy' %>
+        <% end %>
+      </figure>
+    <% end %>
+  </div>
+<% end %>

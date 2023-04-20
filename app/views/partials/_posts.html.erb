@@ -1,0 +1,33 @@
+<div class="pb-6">
+  <h2 class="title is-1 has-text-centered is-color-quaternary my-6">
+    Actualités
+  </h2>
+  <h3 class="subtitle is-3 has-text-centered is-color-quaternary my-6">
+    Actus du Réseau
+  </h3>
+  <div class="columns is-multiline">
+    <%= render partial: 'partials/post_tile', collection: @posts.réseau.limit(3), as: :post, locals: {post_réseau: true } %>
+  </div>
+  <h3 class="subtitle is-3 has-text-centered is-color-quaternary my-6">
+    Échos des Territoires
+  </h3>
+  <div class="columns is-multiline">
+    <%= render partial: 'partials/post_tile', collection: @posts.territoires.limit(4), as: :post, locals: {post_réseau: false } %>
+  </div>
+  <h3 class="subtitle is-3 has-text-centered is-color-quaternary my-6">
+    Échos du monde associatif
+  </h3>
+  <div class="columns is-multiline">
+    <%= render partial: 'partials/post_tile', collection: @posts.secteur.limit(4), as: :post, locals: {post_réseau: false } %>
+  </div>
+  <section class="hero is-small mt-6">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+          <%= link_to "Toutes les actualités", 
+              actualites_path, 
+              class: "button is-uppercase has-text-weight-bold is-background-color-primary is-medium is-centered is-outlined"
+          %>
+      </div>
+    </div>
+  </section>
+</div>

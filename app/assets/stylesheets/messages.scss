@@ -1,0 +1,19 @@
+// Place all the styles related to the Messages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+$color-primary : #27496B;
+
+.button.is-outlined.is-background-color-primary{
+  transition-property: background-color,color;
+  transition-duration: 1s;
+  background-color: transparent;
+  border-color: $color-primary;
+  color: $color-primary;
+
+  &:hover{
+    background-color: $color-primary;
+    border-color: transparent;
+    color: #fff;
+  }
+}

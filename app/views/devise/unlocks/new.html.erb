@@ -1,0 +1,25 @@
+<div id="main-container" style='background-image: url(/backgroundRNMA3.png);background-size: 100%;background-repeat: no-repeat;'>
+  <div id="main-content">
+    <div id="connexion">
+      <h1 class="title is-2 is-color-primary has-text-centered">Renvoyer les instructions de déblocage</h1>
+      <hr>
+      <%= bulma_form_with(model: resource, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="columns">
+          <div class="column">
+
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          
+            <div class="actions">
+              <%= f.submit "Envoyer moi les instructions de déblocage", class: "button is-link" %>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

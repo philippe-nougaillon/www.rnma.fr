@@ -1,0 +1,2 @@
+module CotisationsHelper
+end

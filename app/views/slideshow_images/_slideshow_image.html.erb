@@ -1,0 +1,17 @@
+<tr>
+  <td><%= slideshow_image.titre %></td>
+  <td>
+    <span class="<%= slideshow_image.publique? ? 'has-text-success' : 'has-text-danger'%>">
+      <%= t slideshow_image.publique? %>
+    </span>
+  </td>
+  <td>
+    <span class="<%= slideshow_image.membres? ? 'has-text-success' : 'has-text-danger'%>">
+      <%= t slideshow_image.membres? %>
+    </span>
+  </td>
+  <td><%= slideshow_image.poids %></td>
+  <td><%= link_to 'Voir', slideshow_image %></td>
+  <td><%= link_to 'Modifier', edit_slideshow_image_path(slideshow_image) %></td>
+  <td><%= link_to '[X]', slideshow_image, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

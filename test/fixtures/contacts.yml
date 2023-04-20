@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sophie:
+  maison_id: 1
+  nom: Lebrun
+  prénom: Sophie
+  fonction: Fondatrice
+  téléphone: 0153658219
+  mobile: 0629550862
+  email: sophie.lebrun@gmail.fr
+
+marc:
+  nom: Perrier
+  prénom: Marc
+  fonction: Chomeur
+  téléphone: 0147294738
+  mobile: 0620384743
+  email: marc.perrier@gmail.fr

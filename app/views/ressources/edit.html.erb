@@ -1,0 +1,13 @@
+<div style="<%= current_user.admin ? '' : 'margin-left: 160px; margin-right: 160px; margin-top: 15px' %>">
+  <p class="title is-2">
+    Modifier une Ressource
+  </p>
+
+  <%= render 'form', ressource: @ressource %>
+
+  <div class="mb-6">
+    <%= link_to 'Voir', @ressource %>
+    |
+    <%= link_to 'Retour', ressources_path %>
+  </div>
+</div>

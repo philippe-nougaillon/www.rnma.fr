@@ -1,0 +1,34 @@
+<div class="box">
+    <div class="columns">
+        <div class="column is-one-fifth">
+            <% if attachment = ActiveStorage::Attachment.where(record_type: result.searchable_type, record_id: result.searchable_id).first %>
+                <figure class="image">
+                    <%= image_tag attachment.blob %>
+                </figure>
+            <% end %>
+        </div>
+        <div class="column">
+            <h3 class="title is-5">
+                <%= link_to truncate(result.content, length: 250), 
+                            url_for(controller: result.searchable_type.pluralize.downcase, 
+                                    action: 'show', 
+                                    id: result.searchable_id) %>
+            </h3>
+            <p class="subtitle is-6 mt-3">
+                Contenu de type 
+                <%= link_to result.searchable_type, 
+                            url_for(controller: result.searchable_type.pluralize.downcase),
+                            class: "has-text-link" %>
+                créé il y a 
+                <%= time_ago_in_words(result.created_at) %>
+            </p>
+        </div>
+        <% if current_user.try(:admin?) %>
+            <%= link_to url_for(controller: result.searchable_type.pluralize.downcase, 
+                                action: 'edit', 
+                                id: result.searchable_id) do %>
+                <i class="fas fa-edit"></i>
+            <% end %>
+        <% end %>
+    </div>
+</div>

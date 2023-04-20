@@ -1,0 +1,133 @@
+<%= bulma_form_with(model: ressource) do |form| %>
+  <% if ressource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ressource.errors.count, "erreur") %> empêche(nt) cette ressource d'être enregistrée !:</h2>
+
+      <ul>
+        <% ressource.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :titre, required: true %>
+  <%= form.text_field :description %>
+  <%= form.text_field :chapeau %>
+  
+  <%= form.text_field :tag_list, type: 'tags', value: ressource.tag_list.join(', ') %>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bulma-tagsinput@2.0.0/dist/js/bulma-tagsinput.min.js">
+  </script>
+  <script>
+    bulmaTagsinput.attach('#ressource_tag_list');
+	</script>
+
+
+  <%= form.date_field :date_publication, label: 'Date de publication' %>
+
+  <p class="block">
+    <br>
+    <%= form.label :documents, class:'has-text-weight-bold has-text-dark mb-3' %>
+    <%= form.file_field :documents, multiple: true %>
+  </p>
+  
+  <%= form.text_area :corps, id: "div_editor1" %>
+
+  <p id="ressource-content"style="display: none">
+
+    <%= ressource.corps.body.to_html if ressource.corps.body %>
+
+  </p>
+
+  <script>
+
+    var editor1 = new RichTextEditor("#div_editor1");
+
+    var content = document.getElementById("ressource-content");
+
+    editor1.setHTML(content.textContent); 
+
+  </script>
+
+
+  <div class="columns">
+    <div class="column">
+      <p class="title is-6">
+        Categories
+      </p>
+      <div data-controller="nested-form" data-nested-form-wrapper-selector-value=".nested-form-wrapper">
+        <template data-nested-form-target="template">
+          <%= form.fields_for :categories, Category.new, child_index: 'NEW_RECORD' do | category_fields | %>
+            <%= render "category_form", category: category_fields %>
+          <% end %>
+        </template>
+        <%= form.fields_for :categories do |category_fields| %>
+          <%= render "category_form", category: category_fields %>
+        <% end %>
+
+        <!-- Inserted elements will be injected before that target. -->
+        <div data-nested-form-target="target"></div>
+
+        <button type="button" class="button is-primary mb-6" data-action="nested-form#add">
+          +
+        </button>
+      </div>
+    </div>
+
+    <div class="column">
+      <p class="title is-6">
+        Typologies
+      </p>
+      <div data-controller="nested-form" data-nested-form-wrapper-selector-value=".nested-form-wrapper">
+        <template data-nested-form-target="template">
+          <%= form.fields_for :typologies, Typology.new, child_index: 'NEW_RECORD' do | typology_fields | %>
+            <%= render "typology_form", typology: typology_fields %>
+          <% end %>
+        </template>
+
+        <%= form.fields_for :typologies do |typology_fields| %>
+          <%= render "typology_form", typology: typology_fields %>
+        <% end %>
+
+        <!-- Inserted elements will be injected before that target. -->
+        <div data-nested-form-target="target"></div>
+
+        <button type="button" class="button is-primary mb-6" data-action="nested-form#add">
+          +
+        </button>
+      </div>
+    </div>
+
+    <div class="column">
+      <p class="title is-6">Maisons</p>
+      <div data-controller="nested-form" data-nested-form-wrapper-selector-value=".nested-form-wrapper">
+        <template data-nested-form-target="template">
+          <%= form.fields_for :maisons, Maison.new, child_index: 'NEW_RECORD' do | maison_fields | %>
+            <%= render "maison_form", maison: maison_fields %>
+          <% end %>
+        </template>
+
+        <%= form.fields_for :maisons do |maison_fields| %>
+          <%= render "maison_form", maison: maison_fields %>
+        <% end %>
+
+        <!-- Inserted elements will be injected before that target. -->
+        <div data-nested-form-target="target"></div>
+
+        <button type="button" class="button is-primary mb-6" data-action="nested-form#add">
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <%= form.check_box :membres %>
+
+  <% if current_user.admin? %>
+    <%= form.select :workflow_state, Ressource.workflow_spec.states.keys.to_a, label: "Etat" %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

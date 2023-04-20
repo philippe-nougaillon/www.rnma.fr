@@ -1,0 +1,17 @@
+<p>
+  <strong>Intitulé :</strong>
+  <%= @sib.intitulé %>
+</p>
+
+<p>
+  <strong>Envoyée le :</strong>
+  <%= l @sib.envoyée_le %>
+</p>
+
+<p>
+  <strong>Url :</strong>
+  <%= @sib.url %>
+</p>
+
+<%= link_to 'Modifier', edit_sib_path(@sib) %> |
+<%= link_to 'Retour', sibs_path %>

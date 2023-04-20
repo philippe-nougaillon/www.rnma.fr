@@ -1,0 +1,30 @@
+<%= bulma_form_with(model: slideshow_image) do |form| %>
+  <% if slideshow_image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(slideshow_image.errors.count, "error") %> prohibited this slideshow_image from being saved:</h2>
+
+      <ul>
+        <% slideshow_image.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :titre %>
+  <%= form.number_field :poids %>
+
+  <%= form.label :image %>
+  <%= form.file_field :image %>
+  <br><br>
+  <%= form.text_field :url %>
+
+  <%= form.check_box :publique %>
+  <%= form.check_box :membres %>
+  <br>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+
+<% end %>

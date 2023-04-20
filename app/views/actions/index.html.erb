@@ -1,0 +1,44 @@
+<h1 class="title is-2">
+  <i class="fas fa-calendar-check"></i>
+  Actions
+</h1>
+
+<%= form_tag actions_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: %w{ A\ faire Fait } } %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+
+    <thead>
+      <tr>
+        <th><%= sort_link 'actions.id', 'ID' %></th>
+        <th><%= sort_link 'contacts.nom', 'Contact' %></th>
+        <th><%= sort_link 'maisons.nom', 'Organisation' %></th>
+        <th><%= sort_link 'actions.created_at', 'Quand' %></th>
+        <th><%= sort_link 'actions.user_id', 'Qui' %></th>
+        <th><%= sort_link 'actions.intitulé', 'Intitulé' %></th>
+        <th><%= sort_link 'actions.fait', 'Fait' %></th>
+        <th><%= sort_link 'actions.date_rappel', 'Date rappel' %></th>
+        <th><%= sort_link 'actions.updated_at', 'MÀJ' %></th>
+        <th colspan=3></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @actions.includes(:contact, :user) %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=12></th></tr>
+    </tfoot>
+    
+  </table>
+</div>
+
+<%= page_entries_info @actions, entry_name: 'action' %>
+<%= paginate @actions %>
+
+<div class="mb-6">
+  <%= link_to 'Export XLS', url_for(params.permit(:search, :state).merge(format: :xls)) %>
+</div>

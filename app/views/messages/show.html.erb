@@ -1,0 +1,57 @@
+<p class="title is-3 is-italic">
+  <i class="fas fa-comment-dots"></i>
+  Message de <%= page_title!(@message.email) %>
+</p>
+
+<div id="content" class="content box">
+
+  <p class="my-2">
+    <strong>Nom :</strong>
+    <%= @message.nom %>
+  </p>
+
+  <p class="my-2">
+    <strong>Structure :</strong>
+    <%= @message.structure %>
+  </p>
+
+  <p class="my-2">
+    <strong>Email :</strong>
+    <%= mail_to @message.email, @message.email, {subject: "Re: Votre message au RNMA", body: "#{'_' * 50} \r\n #{@message.message}"} %>
+  </p>
+
+  <p class="my-2">
+    <strong>Téléphone :</strong>
+    <%= @message.téléphone %>
+  </p>
+
+  <p class="my-2">
+    <strong>Tags :</strong>
+    <%= @message.tag_list %>
+  </p>
+
+  <p class="my-2 is-size-5">
+    <%= @message.message %>
+  </p>
+
+  <p class="mt-4">
+    État : 
+    <span class="tag is-medium is-light is-<%= @message.style %>"><%= @message.try(:workflow_state).try(:humanize) %></span>
+  </p>
+
+  <p class="mb-4">
+    <strong>Màj :</strong>
+    <%= l @message.updated_at %>
+  </p>
+
+  <% if current_user && current_user.admin? %>
+    <%= render partial: 'partials/wf_button', locals: { state: 'traité', transition: 'traiter', label: 'traiter' } %>
+    <%= render partial: 'partials/wf_button', locals: { state: 'archivé', transition: 'archiver', label: 'archiver' } %>
+  <% end %>
+</div>
+
+<div class="mb-6">
+  <%= link_to 'Éditer', edit_message_path(@message) %>
+  |
+  <%= link_to 'Retour', messages_path %>
+</div>

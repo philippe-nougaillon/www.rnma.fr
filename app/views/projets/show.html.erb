@@ -1,0 +1,78 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white is-spaced">
+      <%= @projet.titre %>
+    </h1>
+    <h2 class="subtitle is-3 has-text-white">
+      <%= @projet.chapeau %>
+    </h2>
+  </div>
+</section>
+
+<div id="main-container" data-controller="richtext">
+  <div id="main-content">
+    <% if @projet.photo.attached? %>
+      <div class="columns">
+        <div class="column is-one-quarter">
+          <figure class="image mb-6">
+            <%= image_tag @projet.photo, width: '100%', height: '100%', alt: "photo du projet '#{ @projet.titre }'" %>
+          </figure>
+        </div>
+        <div class="column">
+          <div id="content" class="content mb-3">
+            <h3 class="is-size-5 has-text-danger has-text-centered">
+              <%= @projet.thème %>
+            </h3>
+            <%= raw @projet.contenu.body.to_html %>
+          </div>
+          <% if @projet.document.attached? %>
+            <%= link_to @projet.document, { class: 'button is-link is-light', target: "_blank", title: @projet.document.filename } do %>
+              <span class="icon">
+                <i class="fas fa-file-pdf"></i>
+              </span>
+              <span>Accéder au document</span>
+            <% end %>
+          <% end %>
+          <%= render partial: 'partials/social_networks', locals: { url: projet_url(@projet) } %>
+        </div>
+      </div>
+    <% else %>
+      <div id="content" class="content mb-3">
+        <h3 class="is-size-5 has-text-danger has-text-centered">
+          <%= @projet.thème %>
+        </h3>
+        <%= raw @projet.contenu.body.to_html %>
+      </div>
+      <% if @projet.document.attached? %>
+        <%= link_to @projet.document, { class: 'button is-link is-light', target: "_blank", title: @projet.document.filename } do %>
+          <span class="icon">
+            <i class="fas fa-file-pdf"></i>
+          </span>
+          <span>Accéder au document</span>
+        <% end %>
+      <% end %>
+      <%= render partial: 'partials/social_networks', locals: { url: projet_url(@projet) } %>
+    <% end %>
+  </div>
+</div>
+
+  <% if current_user.try(:admin?) %>
+    <hr>
+    <p>
+      Etat : 
+      <span class="tag is-medium is-light <%= @projet.style %>"><%= @projet.workflow_state.humanize %></span>
+    </p>
+    <br>
+
+    <div class="buttons is-grouped">
+      <%= button_to 'Publier', publier_projet_path(@projet), class: 'button is-success is-outlined', disabled: !@projet.can_publier? %>
+      <%= button_to 'Archiver', archiver_projet_path(@projet), class: 'button', disabled: !@projet.can_archiver? %>
+    </div>
+    <hr>
+
+    <div class="mb-6">
+      <%= link_to 'Modifier', edit_projet_path(@projet) %>
+      |
+      <%= link_to 'Retour', projets_path %>
+    </div>
+  <% end %>

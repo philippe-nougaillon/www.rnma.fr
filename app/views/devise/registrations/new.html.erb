@@ -1,0 +1,31 @@
+<div id="main-container" style='background-image: url(/backgroundRNMA3.png);background-size: 100%;background-repeat: no-repeat;'>
+  <div id="main-content">
+    <div id="connexion" >
+      <h1 class="title is-2 is-color-primary has-text-centered">S'inscrire</h1>
+      <hr>
+      <%= bulma_form_with(model: resource, local: true, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="columns">
+          <div class="column" >
+            <%= f.text_field :nom, autofocus: true, autocomplete: "Nom", required: true %>
+            <%= f.text_field :prénom, autocomplete: "Prénom", required: true %>
+            <%= f.email_field :email, autocomplete: "email", required: true %>
+            <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> charactères minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password", label: "Mot de passe", required: true %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", label: "Confirmation du mot de passe", required: true %>
+            <%= f.select :maison_id, options_from_collection_for_select(Maison.reorder(:ville), :id, :ville_mda), label: "Votre Maison des Associations", include_blank: true, required: true %>
+
+            <div class="actions">
+              <%= f.submit "S'inscrire", class: "button is-info" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

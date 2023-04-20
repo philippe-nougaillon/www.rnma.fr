@@ -1,0 +1,162 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white">
+      Les Maisons des Associations
+    </h1>
+    <h2 class="subtitle is-2 has-text-white">
+      <% if params[:state] && !params[:state].blank? %>
+        <%= "Région : #{params[:state]}" %>
+      <% end %>
+    </h2>
+  </div>
+</section>
+
+<div id="main-container">
+  <div id="main-content">
+    <div id="content" class="content has-text-justified">
+      
+      <h2 class="title is-3 my-6 is-color-tertiary has-text-weight-bold">
+        Carte d'identité d'une structure de développement de la vie associative locale
+      </h2>
+
+      <p class="is-size-4">
+        <strong>Appellations diverses sans notions de classement : </strong>
+        Maison des associations, Maison de la vie associative et des initiatives citoyennes, 
+        Centre de ressources des bénévoles, Service (municipal) de la vie asso­ciative, 
+        Carré des associations, Espace associatif, Espace 1901 …  liste non exhaustive.
+
+        <br><br>
+
+        <strong>Statut :</strong>
+        associatif ou public
+
+        <br><br>
+
+        <strong>Périmètre géographique :</strong>
+        de la commune au département
+
+        <br><br>
+
+        <strong>Une diversité de modèle et d’actions</strong><br>
+        Les Maisons des Associations et autres Structures de Dévelop­pement de la Vie Associative Locale 
+        se caractérisent par une grande diversité dans la taille de leurs équipes et le spectre de leurs actions. 
+        Leur projet évolue au regard du contexte local, en prenant en compte les besoins de développement 
+        identifiés auprès des associations et la complémentarité d’action avec des structures partenaires 
+        du même territoire qui œuvrent également pour le soutien au secteur associatif. 
+        C’est pourquoi <strong>il n’existe pas un modèle de fonctionnement normé.</strong>
+
+        <br><br>
+
+        Parmi les actions les plus courantes des MDA, on peut retrouver : 
+      </p>
+
+      <ul class="is-size-4">
+        <li>la promotion du bénévolat et de l’en­gagement,</li>
+        <li>la montée en compétence des responsables associatifs,</li>
+        <li>la mise en réseau des associations locales,</li>
+        <li>la mise à disposition de matériel et de locaux,</li>
+        <li>la sensibilisation à la vie associative auprès des jeunes,</li>
+        <li>le soutien à la qualité de l’emploi associatif,</li>
+        <li>la facilitation de démarches participatives entre collectivités et habitants,</li>
+        <li>l’animation de la co-construction de politiques publiques associatives.</li>
+      </ul>
+
+      <div id="fonctions">
+
+        <br><br><br><br>
+
+        <h2 class="title is-3 is-color-tertiary has-text-weight-bold mb-6">
+          les Grandes Fonctions
+        </h2>
+
+        <p class="subtitle is-size-4">
+          <strong>Facilitatrice logistique</strong>
+          <br>
+          Elle met à disposition des associations des moyens matériels indispensables à l’exécution des projets : 
+          espaces de travail (bureaux, salles de réunion, coworking) ou d’activité (salles de sport, de musique), 
+          commodités bureautiques (ordina­teur, imprimante, accès wifi gratuit... ), 
+          domiciliations d’associations locales. Elle dispose parfois de matériel en prêt ou location avantageuse. 
+          Elle contri­bue à fluidifier les modalités d’affectation des ressources de la collectivité 
+          envers les associations.
+
+          <br><br>
+
+          <strong>Le point d’appui à la vie associative</strong>
+          <br>
+          Grâce à des entretiens individuels aux porteurs de projets, à des formations aux responsables associatifs, 
+          à la mise en réseau entre acteurs associatifs et institutionnels, elle facilite et accélère le développement 
+          des projets associatifs. Elle s’appuie pour cela sur des professionnels accompagnateurs, fins connaisseurs 
+          des associations et de leur écosystème.
+
+          <br><br>
+
+          <strong>Espace de développement local</strong>
+          <br>
+          Espace de co-construction, elle organise l’émergence d’une parole collective entre les associations.
+          Elle permet ainsi l’organisation d’actions inter-associa­tives de plus grande portée, 
+          ou la naissance de projets innovants. Elle contribue à alimenter la politique associative des collectivités locales
+          en identifiant des besoins, des enjeux, des priorités diagnostiquées avec les associations, 
+          au sein de Conseils locaux de vie associative par exemple.. Elle tisse des liens avec le monde de l’entreprise 
+          pour agir ensemble vers l’intérêt général.
+        </p>
+      </div>
+
+      <div id="cartographie"><br><br><br><br></div>
+
+      <h2 class="title is-3 is-color-tertiary has-text-weight-bold">
+        Cartographie des membres de RNMA
+        <% if params[:state] && !params[:state].blank? %>
+          <%= " : #{params[:state]}" %>
+        <% end %>
+      </h2>
+      <h3 class="subtitle is-4">
+      </h2>
+
+      <div class= "box has-text-centered">
+        <div id='map' style='height: 70vh;'>
+        </div>
+
+        <%= form_tag les_maisons_path(anchor: "cartographie"), method: :get do %>
+          <div class="control select mt-3">
+            <%= select_tag :state, options_for_select(@regions, params[:state]), onchange: 'this.form.submit()', prompt: (params[:state].blank? ? 'Choisir une région' : 'Toutes les régions') %>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="liste" class="content">
+
+        <br><br><br><br>
+
+        <h2 class="title is-3 my-6 is-color-tertiary has-text-weight-bold">
+          Liste des maisons
+          <% if params[:state] && !params[:state].blank? %>
+            <%= " : #{params[:state]}" %>
+          <% end %>
+        </h2>
+        <div class="columns is-multiline mb-6">
+          <%= render partial: 'partials/maison_tile', collection: @maisons, as: :maison %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoicGhpbG5vdWciLCJhIjoiY2tzc3E5ZnVrMHJnYzMxcG56aDUxeHkxYyJ9.h1b50RSa3JL_TX6gtLPwcg';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    center: <%= @center %>,
+    zoom: <%= @zoom %>,
+    style: 'mapbox://styles/mapbox/streets-v11'
+  });
+
+  <% @maisons.where.not(latitude: nil).each do | maison | %>
+    var marker = new mapboxgl.Marker({ color: "#FF0000"})
+      .setLngLat(<%= [maison.longitude, maison.latitude] %>)
+      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      .setHTML("<a id='pin' href='#<%= maison.id %>'><h1 class='has-text-weight-bold has-text-centered is-size-6 mb-4'><%= maison.nom %></h1><p class='is-size-7'><%= maison.adresse %></p><p class='is-size-7'><%= maison.cp[0..1] %> <%= maison.ville %></p><br><a href='<%=maison.site %>'><%= URI.parse(maison.site).host %></a></a>"))
+      .addTo(map);
+  <% end %>
+  
+  setTimeout(function(){ map.setLayoutProperty('country-label', 'text-field', ['get', 'name_fr']); }, 3000);
+</script>

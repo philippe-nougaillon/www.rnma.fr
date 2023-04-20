@@ -1,0 +1,25 @@
+<div class="container">
+
+  <h1 style="font-size: 20px">
+    <%= @user.prénom %> <%= @user.nom %> (<%= @user.maison.nom %>) est en attente d'approbation.
+  </h1>
+
+  <p>
+    <strong>Nom : </strong>
+    <%= @user.nom %>
+  </p>
+  <p>
+    <strong>Prénom : </strong>
+    <%= @user.prénom %>
+  </p>
+  <p>
+    <strong>Email : </strong>
+    <%= @user.email %>
+  </p>
+  <p>
+    <strong>Maison : </strong>
+    <%= @user.maison.nom %>
+  </p>
+
+  <%= link_to "Voir la liste des utilisateurs à approuver", users_url %>
+</div>

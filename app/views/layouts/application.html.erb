@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title><%= page_title %></title>
+    <% set_meta_tags description: "Le Réseau des Maisons des associations regroupe des organismes ayant pour mission le développement de la vie associative locale. Le RNMA est aujourd’hui une Fabrique de communs au service de la vie associative territoriale grâce à la promotion, le partage et le développement de projets associatifs." %>
+    <%= display_meta_tags %>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render 'partials/favicon' %>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;700&family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application' %>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+    <script type="text/javascript" src="/richtexteditor/rte.js"></script>
+    <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
+  </head>
+
+  <body>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= render 'partials/nav' %>
+      <%= render 'partials/notification' %>
+      <div class="container is-fluid">
+        <%= yield %>
+      </div>
+    <% else %>
+      <%= render 'partials/nav_front' %>
+      <%= render 'partials/notification' %>
+      <%= yield %>
+    <% end %>
+  </body>
+
+  <%= render 'partials/scripts' %>
+
+</html>

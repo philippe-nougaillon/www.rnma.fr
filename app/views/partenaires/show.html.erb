@@ -1,0 +1,37 @@
+
+<div class="box">
+  <p class="title is-3 mb-6">
+    <i class="fas fa-file-invoice"></i>
+    Partenaire 
+    <%= @partenaire.nom %>
+  </p>
+  <p>
+    <strong>Type partenaire :</strong>
+    <%= @partenaire.type_partenaire %>
+  </p>
+  <br>
+  <p>
+    <strong>Lien :</strong>
+    <%= @partenaire.lien %>
+  </p>
+  <p>
+    <strong>Description :</strong>
+    <%= @partenaire.description %>
+  </p>
+  <p>
+    <strong>Poids :</strong>
+    <%= @partenaire.poids %>
+  </p>
+  <br>
+  <p>
+    <strong>Logo :</strong>
+    <br>
+    <%= image_tag(@partenaire.logo) if @partenaire.logo.attached? %>
+  </p>
+</div>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_partenaire_path(@partenaire) %>
+  |
+  <%= link_to 'Retour', partenaires_path %>
+</div>

@@ -1,0 +1,55 @@
+<div class="tile is-parent is-6">
+  <article class="box tile is-child ressource-tile">
+    <div class="columns m-1">
+      
+      <div class="column is-one-quarter">
+        <%= link_to ressource do %>
+          <figure class="image is-96x96">
+            <% if ressource.photo.attached? %>
+              <%= image_tag ressource.photo, width: '100%', height: '100%', alt: "photo de la ressource '#{ ressource.titre }'", loading: 'lazy' %>
+            <% else %>
+              <%= image_tag 'ressource_placeholder.webp', style: "opacity: 25%", width: '100%', height: '100%', alt: "photo de remplacement de la ressource '#{ ressource.titre }'", loading: 'lazy' %>
+            <% end %>
+          </figure>
+        <% end %>
+      </div>
+
+      <div class="column">
+        <%= link_to ressource do %>
+          <p class="title is-4 has-text-weight-bold">
+            <%= ressource.titre %>
+          </p>
+          
+          <p id="ressource-category" class="subtitle is-6 has-text-weight-bold mb-3 mt-3">
+            <% if ressource.categories.any? %>
+              <%= ressource.categories.pluck(:nom).first %>
+              <% if ressource.date_publication %>
+                /
+                <%= ressource.date_publication.year %>
+              <% end %>
+            <% else %>
+              <%= ressource.date_publication.year if ressource.date_publication %>
+            <% end %>
+          </p>
+          <p class="is-size-6 has-text-justified mb-4">
+            <%= ressource.description %>
+          </p>
+          <p>
+            <% ressource.tags.each do |tag| %>
+              <%= link_to url_for(tagged_with: tag.name) do %>
+                <span class="tag is-rounded my-1">
+                  <%= tag %>
+                </span>
+              <% end %>
+            <% end %>
+          </p> 
+          <% if current_user.try(:admin?) %>
+            <%= link_to edit_ressource_path(ressource) do %>
+              <i class="fas fa-edit" style="float: right"></i>
+            <% end %>
+          <% end %> 
+        <% end %>
+      </div>
+    </div>
+  </article>
+</div>

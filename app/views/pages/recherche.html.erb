@@ -1,0 +1,40 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white">
+      Rechercher
+    </h1>
+  </div>
+</section>
+
+<div class="column is-half is-offset-one-quarter mb-6">
+  <h2 class="subtitle is-2 is-color-primary">
+    Entrez un terme à rechercher dans tout le site
+  </h2>
+  <%= form_tag recherche_path, method: :get do %>
+    <div class="field p-3">
+      <div class="control has-icons-left has-icons-right">
+        <%= text_field_tag :search, 
+                              params[:search], 
+                              class: "input is-rounded is-info", 
+                              placeholder: "ex: OLVA, innover, CFGA, gestion, vie associative, Quimper...",
+                              autofocus: true %>
+        <span class="icon is-small is-left">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+  <% end %>
+
+  <% if defined?(@results) %>
+    <% if @results.any? %>
+      <%= render partial: @results, as: :result %>
+      <div class="my-6">
+        <%= paginate @results, theme: 'front', outer_window: 1, window: 2 %>
+      </div>
+    <% else %>
+      <p class="title is-4 has-text-centered p-6">
+        Aucun résultat trouvé...
+      </p>
+    <% end %>
+  <% end %>
+</div>

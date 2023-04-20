@@ -1,0 +1,70 @@
+<header>
+  <nav class="navbar mb-5 is-spaced" role="navigation" aria-label="main navigation">
+
+    <div class="navbar-brand">
+      <%= link_to membres_index_path, style: 'width: 70px', 'aria-label': 'logo' do %>
+        <%= image_tag 'logo.webp', width: '100%', height: '100%', alt: 'logo RNMA' %>
+      <% end %>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-back">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div><!-- /navbar-brand -->
+
+    <div id="navbar-back" class="navbar-menu">
+
+      <% if user_signed_in? %>
+        <div id="navbar-back-start" class="navbar-start has-text-weight-bold ml-3">
+          <%= navbar_nav_item 'file-contract', 'adhesions', adhesions_path, 'Adhésions' %>
+          <%= navbar_nav_item 'file-invoice', 'cotisations', cotisations_path %>
+          <%= navbar_nav_item 'hotel','maisons', maisons_path %>
+          <%= navbar_nav_item 'id-card-alt','contacts', contacts_path %>
+          <%= navbar_nav_item 'calendar-check','actions', actions_path %>
+          |
+          <%= navbar_nav_item 'newspaper','posts', posts_path, 'Actualités' %>
+          <%= navbar_nav_item 'calendar-alt','evenements', evenements_path, 'Agenda' %> 
+        </div><!-- /navbar-start -->
+      <% end %>
+
+      <div class="navbar-end">
+        <div class="navbar-item has-text-weight-bold">
+          <% if user_signed_in? %>
+            <div class="mr-3">
+              <small><%= current_user.prénom %></small>
+            </div>
+          <% end %>
+          <div class="buttons">
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                <%= link_to "Administration", 
+                            admin_index_path, 
+                            class: "button is-link is-outlined is-small" 
+                %>
+
+                <%= link_to "Mémo",
+                            admin_memo_path, 
+                            class: "button is-link is-outlined is-small" 
+                %>
+              <% end %> 
+
+              <%= link_to "Déconnexion", 
+                  destroy_user_session_path, 
+                  method: :delete, 
+                  class: "button is-danger is-outlined is-small" 
+              %>
+            <% else %>
+              <%= link_to "Connexion", 
+                  new_user_session_path, 
+                  class: "button is-primary is-outlined is-small" 
+              %>
+            <% end %>
+          </div><!-- /buttons -->
+        </div><!-- /navbar-item -->
+      </div><!-- /navbar-end -->
+
+    </div><!-- /navbar-menu -->
+
+  </nav>
+</header>

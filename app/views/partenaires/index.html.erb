@@ -1,0 +1,37 @@
+<h1 class="title is-2">
+  <i class="fas fa-handshake"></i>
+  Partenaires
+</h1>
+
+<%= form_tag partenaires_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: Partenaire.type_partenaires.keys } %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Lien</th>
+        <th>Poids</th>
+        <th colspan=2></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @partenaires %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=6></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<br>
+
+<%= page_entries_info @partenaires, entry_name: 'partenaire' %>
+<%= paginate @partenaires %>

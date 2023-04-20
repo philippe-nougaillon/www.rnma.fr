@@ -1,0 +1,20 @@
+<div class="nested-form-wrapper box mb-6" data-new-record="<%= contact.object.new_record? %>">
+  <div class="field has-addons">
+    <div class="control is-expanded"><%= contact.text_field :nom %></div>
+    <div class="control is-expanded"><%= contact.text_field :prénom %></div>
+    <div class="control is-expanded"><%= contact.text_field :fonction %></div>
+    <div class="control is-expanded"><%= contact.text_field :téléphone %></div>
+    <div class="control is-expanded"><%= contact.text_field :mobile %></div>
+  </div>
+  <div class="field has-addons">
+    <div class="control is-expanded"><%= contact.text_field :email %></div>
+    <div class="control is-expanded"><%= contact.text_field :tag_list, value: contact.object.tag_list.join(', '), label: 'Tags (ex: Membre, Bénévole)' %></div>
+    <div class="control is-expanded"><%= contact.text_field :adresse %></div>
+    <div class="control is-expanded"><%= contact.text_field :cp %></div>
+    <div class="control is-expanded"><%= contact.text_field :ville %></div>
+  </div>
+  <%= contact.label :mémo, class:'has-text-weight-bold has-text-dark' %>
+  <div class="field has-addons">
+    <div class="control is-expanded"><%= contact.rich_text_area :mémo, class: "content customized-min-height" %></div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<h1 class="title is-2">
+  <i class="fas fa-comment-dots"></i>
+  Messages (Nous Contacter)
+</h1>
+
+<%= form_tag messages_path, method: :get do %>
+  <%= render partial: 'partials/search', locals: { states: Message.workflow_spec.states.keys.to_a, show_new_button: false } %>
+<% end %>
+
+<%= render partial: 'partials/tag_list', locals: { tags: @messages.tag_counts.order('taggings_count DESC') } %>
+
+<div class="table-container mt-3">
+  <table class="table is-hoverable is-striped is-fullwidth">
+  
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Structure</th>
+        <th>Email</th>
+        <th>Message</th>
+        <th>État</th>
+        <th>Tags</th>
+        <th>MàJ</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @messages %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=8></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<%= page_entries_info @messages, entry_name: 'message' %>
+<%= paginate @messages %>
+
+<%= pp @messages.reorder(nil).select(:id).group(:workflow_state).count(:id) %>
+
+<div class="mb-6 mt-2">
+  <%= link_to 'Export XLS', url_for(params.permit(:search, :state).merge(format: :xls)) %>
+</div>
+

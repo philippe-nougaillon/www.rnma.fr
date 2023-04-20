@@ -1,0 +1,10 @@
+<%= bulma_form_with(model: sib) do |form| %>
+
+  <%= form.text_field :intitulé, required: true %>
+  <%= form.date_select :envoyée_le, required: true %>
+  <%= form.text_field :url, required: true %>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

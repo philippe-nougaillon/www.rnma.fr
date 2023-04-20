@@ -1,0 +1,31 @@
+# ##############################################################################
+#
+# ATTENTION !!!
+#
+# SI ON AJOUTE D'AUTRE POST, LE TEST DANS L'ESPACE MEMBRE NE SERA PLUS CORRECTE
+#
+# ##############################################################################
+
+published_public_post_one:
+  titre: Retour sur notre Assemblée générale 2021 !
+  chapeau: Malgré les circonstances liées à la crise sanitaire, le RNMA a fait le choix de maintenir cette année encore son Assemblée générale ordinaire à distance à la date prévue du 1e avril.
+  workflow_state: publié
+  membres: false
+
+published_public_post_two:
+  titre: Résultats d'enquête Covid-19, où en sont les associations un an après ?
+  chapeau: Le Mouvement associatif, en partenariat avec le RNMA et Recherches & Solidarités, publie les résultats du troisième volet de l’enquête concernant les impacts de la crise sanitaire sur les associations. Retrouvez tous les résultats de cette 3ème enquête présentés à l'occasion d'un webinaire organisé le mardi 8 juin à 17h.
+  workflow_state: publié
+  membres: false
+
+published_member_post:
+  titre: Le Contrat d'Engagement Républicain
+  chapeau: COMMUNIQUE du Conseil d'Administration du RNMA du 14 février
+  workflow_state: publié
+  membres: true
+
+not_published_public_post:
+  titre: Situation en Covid-19
+  chapeau: COMMUNIQUE du Conseil d'Administration du RNMA du 14 février
+  workflow_state: nouvelle
+  membres: false

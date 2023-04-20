@@ -1,0 +1,36 @@
+<h1 class="title is-2">
+  <i class="fas fa-file"></i>
+  Publications
+</h1>
+
+<%= form_tag publications_path, method: :get do %>
+  <%= render partial: 'partials/search' %>
+<% end %>
+
+<div class="table-container">
+  <table class="table is-hoverable is-striped is-fullwidth">
+  
+    <thead>
+      <tr>
+        <th></th>
+        <th>Titre</th>
+        <th>Chapeau</th>
+        <th>Document</th>
+        <th colspan=2></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @publications %>
+    </tbody>
+
+    <tfoot>
+      <tr><th colspan=6></th></tr>
+    </tfoot>
+
+  </table>
+</div>
+
+
+<%= page_entries_info @publications, entry_name: 'publication' %>
+<%= paginate @publications %>

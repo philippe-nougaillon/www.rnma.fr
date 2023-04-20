@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  intitulé: MyString
+  envoyée_le: 2023-02-20
+  url: MyString
+
+two:
+  intitulé: MyString
+  envoyée_le: 2023-02-20
+  url: MyString

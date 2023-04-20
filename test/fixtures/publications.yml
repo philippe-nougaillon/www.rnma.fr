@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titre: Assemblée générale 2021
+  chapeau: Malgré les circonstances liées à la crise sanitaire, le RNMA a fait le choix de maintenir cette année encore son Assemblée générale ordinaire à distance à la date prévue du 1e avril
+  workflow_state: publiée
+
+
+two:
+  titre: MyString
+  chapeau: MyString
+  workflow_state: publiée
+

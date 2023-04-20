@@ -1,0 +1,11 @@
+<p class="title is-2">
+  Modifier un événement
+</p>
+
+<%= render 'form', evenement: @evenement %>
+
+<div class="mb-6">
+  <%= link_to 'Voir', @evenement %>
+  |
+  <%= link_to 'Retour', evenements_path %>
+</div>

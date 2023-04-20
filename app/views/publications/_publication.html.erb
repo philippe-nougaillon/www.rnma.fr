@@ -1,0 +1,22 @@
+<tr>
+  <td>
+    <%= link_to publication do %>
+      <figure class="image is-48x48">
+        <% if publication.photo.attached? %>
+          <%= image_tag publication.photo, width: '100%', height: '100%', alt: "photo de la publication '#{ publication.titre }'" %>
+        <% else %>
+          <%= image_tag 'ressource_placeholder.webp', width: '100%', height: '100%', alt: "photo de remplacement de la publication '#{ publication.titre }'" %>
+        <% end %>
+      </figure>
+    <% end %>
+  </td>
+  <td><%= link_to publication.titre, publication %></td>
+  <td><%= publication.chapeau %></td>
+  <td>
+    <% if publication.document.attached? %>
+      <%= link_to "Accéder à la publication", publication.document %>
+    <% end %>
+  </td>
+  <td><%= link_to 'Modifier', edit_publication_path(publication) %></td>
+  <td><%= link_to '[X]', publication, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

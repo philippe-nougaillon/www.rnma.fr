@@ -1,0 +1,39 @@
+# ##############################################################################
+#
+# ATTENTION !!!
+#
+# SI ON AJOUTE D'AUTRE EVENT, LE TEST DANS L'ESPACE MEMBRE NE SERA PLUS CORRECTE
+#
+# ##############################################################################
+
+published_public_event_one:
+  debut: 2026-06-03
+  lieu: en visio conférence
+  titre: Web-conférence Collectivités et accompagnement des associations
+  chapeau: Web-conférence Collectivités et accompagnement des associations en visio-conférence
+  workflow_state: publié
+  membres: false
+
+published_public_event_two:
+  debut: 2026-03-22
+  lieu: en visio
+  titre: Webinaire évaluation des Conseils Citoyens
+  chapeau: MyString
+  workflow_state: publié
+  membres: false
+
+not_published_public_event:
+  debut: 2026-06-22
+  lieu: Roanne
+  titre: Assemblée générale ordinaire et extraordinaire du RNMA
+  chapeau: MyString
+  workflow_state: nouveau
+  membres: false
+
+published_member_event:
+  debut: 2026-05-12
+  lieu: Paris
+  titre: Formation OLVA - Animer sa démarche d'observation
+  chapeau: MyString
+  workflow_state: publié
+  membres: true

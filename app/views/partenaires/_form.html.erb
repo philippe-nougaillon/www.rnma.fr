@@ -1,0 +1,25 @@
+<%= bulma_form_with(model: partenaire) do |form| %>
+  <% if partenaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(partenaire.errors.count, "error") %> prohibited this partenaire from being saved:</h2>
+
+      <ul>
+        <% partenaire.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :nom %>
+  <%= form.select :type_partenaire, options_for_select(Partenaire.type_partenaires.keys, partenaire.type_partenaire) %>
+  <%= form.text_field :lien %>
+  <%= form.text_area :description %>
+  <%= form.label :logo, class: 'has-text-weight-bold has-text-dark' %>
+  <%= form.file_field :logo, class: 'mb-3' %>
+  <%= form.number_field :poids %>
+
+  <div class="actions mt-6">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

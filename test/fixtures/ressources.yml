@@ -1,0 +1,14 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titre: Les communs dans la transition numérique
+  description: Tour des tendances positives, sur lesquelles le fait associatif s’appuie pour défendre et mettre en œuvre un projet de société plus juste, plus solidaire et plus responsable, notamment avec la notion de communs. ﻿
+  chapeau: Dans le premier volet de cette nouvelle rubrique, nous avions dressé le tableau des tendances et des ruptures numériques les plus négatives. Nous allons maintenant faire un tour des tendances positives, sur lesquelles le fait associatif s’appuie pour défendre et mettre en œuvre un projet de société plus juste, plus solidaire et plus responsable, notamment avec la notion de communs. ﻿
+  slug: MyString
+  workflow_state: publiée
+
+two:
+  titre: MyString
+  chapeau: MyString
+  slug: MyString
+  workflow_state: publiée

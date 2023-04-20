@@ -1,0 +1,10 @@
+<p>
+  <strong>Nom :</strong>
+  <%= @typology.nom %>
+</p>
+
+<div class="mb-6">
+  <%= link_to 'Modifier', edit_typology_path(@typology) %>
+  |
+  <%= link_to 'Retour', typologies_path %>
+</div>

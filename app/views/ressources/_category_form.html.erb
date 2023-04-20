@@ -1,0 +1,14 @@
+<div class="nested-form-wrapper" data-new-record="<%= category.object.new_record? %>">
+  <div class="field has-addons">
+    <div class="control">
+      <%= category.select :id, options_from_collection_for_select(Category.reorder(:nom), :id, :nom, category.object.id), hide_label: true %>
+    </div>
+    <div class="control">
+      <button title="Supprimer l'action" type="button" class="button" data-action="nested-form#remove">
+        <b>x</b>
+      </button>
+    </div>
+  </div>
+  
+  <%= category.hidden_field :_destroy if category.object.id %>
+</div>

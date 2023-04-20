@@ -1,0 +1,22 @@
+<tr>
+    <td style="text-align: right"><%= link_to maison.id, maison %></td>
+    <td><%= link_to maison.nom, maison %></td>
+    <td><%= maison.type_structure %></td>
+    <td><%= maison.ville %></td>
+    <td><%= maison.region_name %></td>
+    <td>
+        <% if maison.adhesion %>
+            <span class="tag is-small is-light <%= maison.adhesion.style %>"><%= maison.adhesion.workflow_state.humanize %></span> 
+        <% end %>
+    </td>
+    <td>
+        <% if maison.cotisations.any? %>
+            <span class="tag is-small is-light <%= maison.cotisations.last.style %>"><%= maison.cotisations.last.workflow_state.humanize %></span>
+        <% end %>
+    </td>
+    <td><%= maison.contacts.size %></td>
+    <td><%= maison.actions.size %></td>
+    <td><%= time_ago_in_words maison.updated_at %></td>
+    <td><%= link_to 'Modifier', edit_maison_path(maison) %></td>
+    <td><%= link_to_unless maison.adhesion, '[X]', maison, method: :delete, data: { confirm: 'Êtes-vous certain(e) ?' } %></td>
+</tr>

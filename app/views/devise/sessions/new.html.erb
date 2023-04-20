@@ -1,0 +1,30 @@
+<div id="main-container" style='background-image: url(/backgroundRNMA3.png);background-size: 100%;background-repeat: no-repeat;'>
+  <div id="main-content">
+    <div id="connexion">
+      <h1 class="title is-2 is-color-primary has-text-centered">Connexion</h1>
+      <hr>
+      <%= bulma_form_with(model: resource, local: true, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="columns">
+          <div class="column">
+            
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", label: "Email" %>
+            <%= f.password_field :password, autocomplete: "current-password", label: "Mot de passe" %>
+
+            <% if devise_mapping.rememberable? %>
+              <div style="display: none;">
+                <%= f.check_box :remember_me, checked: true %>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+
+        <div class="actions has-text-centered my-6">
+          <%= f.submit "Se connecter", class: "button is-info" %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

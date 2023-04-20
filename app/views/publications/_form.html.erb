@@ -1,0 +1,43 @@
+<%= bulma_form_with(model: publication) do |form| %>
+  <% if publication.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+
+      <ul>
+        <% publication.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= form.text_field :titre %>
+    <%= form.text_field :chapeau %>
+    <%= form.text_field :thème %>
+    <%= form.label :photo, class: 'has-text-weight-bold has-text-dark' %>
+    <%= form.file_field :photo %>
+    <%= form.label :document, class: 'has-text-weight-bold has-text-dark mt-3' %>
+    <%= form.file_field :document %>
+    <br><br>
+    <%= form.text_area :contenu, id: "div_editor1" %>
+
+    <p id="publication-content"style="display: none">
+
+      <%= publication.contenu.body.to_html if publication.contenu.body %>
+
+    </p>
+
+    <script>
+
+      var editor1 = new RichTextEditor("#div_editor1");
+
+      var content = document.getElementById("publication-content");
+
+      editor1.setHTML(content.textContent); 
+
+    </script>
+
+  <div class="actions">
+    <%= form.submit 'Enregistrer', class: 'button is-success' %>
+  </div>
+<% end %>

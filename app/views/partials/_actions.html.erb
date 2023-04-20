@@ -1,0 +1,21 @@
+<p>
+  <p class="title is-5">Actions</p>
+
+  <div id="content" class="content">
+    <ul>
+      <% actions.each do |action| %>
+        <li>
+          Il y a <%= time_ago_in_words (action.created_at) %>
+          <br>
+          <%= action.user.prénom %>
+          <br>
+          <strong><%= action.intitulé %>
+          => 
+          <%= action.contact.nom_prénom %></strong>
+          <br>
+          <%= action.mémo %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</p>

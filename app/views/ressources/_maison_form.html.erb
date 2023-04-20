@@ -1,0 +1,14 @@
+<div class="nested-form-wrapper" data-new-record="<%= maison.object.new_record? %>">
+  <div class="field has-addons">
+    <div class="control" style= "width: 50%">
+      <%= maison.select :id, options_from_collection_for_select(Maison.reorder(:ville), :id, :ville_mda, maison.object.id), hide_label: true %>
+    </div>
+    <div class="control">
+      <button title="Supprimer l'action" type="button" class="button" data-action="nested-form#remove">
+        <b>x</b>
+      </button>
+    </div>
+  </div>
+
+  <%= maison.hidden_field :_destroy if maison.object.id %>
+</div>

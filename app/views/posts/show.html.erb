@@ -1,0 +1,58 @@
+<section class="hero is-background-color-primary mb-6">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 has-text-white is-spaced">
+      <%= @post.titre %>
+    </h1>
+    <h2 class="subtitle is-3 has-text-white">
+      Publiée le
+      <%= @post.created_at.day %>
+      <%= l @post.created_at.to_date, format: :month %>
+      <%= @post.created_at.year %>
+    </h2>
+  </div>
+</section>
+
+<div id="main-container">
+  <div id="main-content">
+    <% if @post.poster.attached? %>
+      <div class="m-6 px-6">
+        <figure class="image mb-2">
+          <%= image_tag @post.poster, width: '100%', height: '100%', alt: "poster du post '#{ @post.titre }'" %>
+        </figure>
+      </div>
+    <% end %>
+
+    <p>
+    
+    <div id="content" class="content">
+      <%= raw @post.contenu.body.to_html %>
+    </div>
+    <%= render partial: 'partials/social_networks', locals: { url: post_url(@post) } %>
+
+    <% if current_user.try(:admin?) %>
+      <hr>
+      <p>
+        Etat : 
+        <span class="tag is-large is-light <%= @post.style %>"><%= @post.workflow_state.humanize %></span>
+      </p>
+      <br>
+
+      <div class="buttons is-grouped">
+        <%= button_to 'Publier', publier_post_path(@post), class: 'button is-success is-outlined', disabled: !@post.can_publier? %>
+        <%= button_to 'Promouvoir', promouvoir_post_path(@post), class: 'button is-warning is-outlined', disabled: !@post.can_promouvoir? %>
+        <%= button_to 'Archiver', archiver_post_path(@post), class: 'button', disabled: !@post.can_archiver? %>
+      </div>
+
+      <hr>
+      <div class="mb-6">
+        <%= link_to 'Modifier', edit_post_path(@post) %>
+        |
+        <%= link_to 'Retour', posts_path %>
+      </div>
+    <% end %>
+
+    <% unless user_signed_in? %>
+      <%= render partial: 'partials/posts', locals: { post: @posts} %>
+    <% end %>
+  </div>
+</div>
